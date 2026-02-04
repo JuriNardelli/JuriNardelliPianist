@@ -68,7 +68,29 @@ const fadeInVariants = {
 
 export function BiographyStory() {
   return (
-    <section className="min-h-screen bg-black pb-32 pt-32">
+    <section className="min-h-screen bg-black pb-32 pt-32 relative overflow-hidden">
+      {/* Animated background orbs */}
+      <div className="pointer-events-none absolute inset-0">
+        <motion.div
+          animate={{ x: [0, 80, 0], y: [0, -40, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-20 left-1/4 h-72 w-72 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-3xl"
+        />
+        <motion.div
+          animate={{ x: [0, -60, 0], y: [0, 60, 0] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 blur-3xl"
+        />
+      </div>
+
+      {/* Grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
+        }}
+      />
       {/* Header */}
       <div className="mx-auto max-w-4xl px-6 text-center">
         <motion.p
@@ -98,7 +120,13 @@ export function BiographyStory() {
       {/* Chapters with Timeline */}
       <div className="mx-auto mt-24 max-w-6xl px-6 relative">
         {/* Vertical timeline line - centered on desktop, left on mobile */}
-        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-zinc-800 to-transparent" />
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-zinc-700 to-transparent" />
+        {/* Glowing timeline accent */}
+        <motion.div
+          className="absolute left-6 md:left-1/2 top-0 w-px h-32 bg-gradient-to-b from-cyan-500/50 to-transparent blur-sm"
+          animate={{ top: ["0%", "100%", "0%"] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
 
         {chapters.map((chapter, index) => (
           <motion.div
@@ -113,23 +141,32 @@ export function BiographyStory() {
           >
             {/* Timeline dot - left on mobile, centered on desktop */}
             <div className="absolute left-6 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <div className="h-3 w-3 rounded-full bg-zinc-700 ring-4 ring-black" />
+              <motion.div
+                className="relative"
+                whileInView={{ scale: [0, 1.2, 1] }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="h-3 w-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 ring-4 ring-black" />
+                <div className="absolute inset-0 h-3 w-3 rounded-full bg-cyan-500/50 blur-md" />
+              </motion.div>
             </div>
 
             {/* Circular Photo */}
-            <div className="relative flex-shrink-0">
-              <div className="relative h-64 w-64 overflow-hidden rounded-full border border-zinc-800 bg-zinc-900 sm:h-72 sm:w-72 lg:h-80 lg:w-80 transition-transform duration-500 hover:scale-105">
+            <div className="relative flex-shrink-0 group">
+              {/* Animated glow ring on hover */}
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-500/0 via-cyan-500/0 to-amber-500/0 blur-xl transition-all duration-500 group-hover:from-purple-500/20 group-hover:via-cyan-500/20 group-hover:to-amber-500/20" />
+              <div className="relative h-64 w-64 overflow-hidden rounded-full border border-zinc-800 bg-zinc-900 sm:h-72 sm:w-72 lg:h-80 lg:w-80 transition-transform duration-500 group-hover:scale-105">
                 <Image
                   src={chapter.image}
                   alt={chapter.title}
                   fill
-                  className={`object-cover ${chapter.imagePosition}`}
+                  className={`object-cover ${chapter.imagePosition} transition-transform duration-700 group-hover:scale-110`}
                 />
+                <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10" />
               </div>
               {/* Decorative ring */}
-              <div className="absolute -inset-3 rounded-full border border-zinc-800/50" />
-              {/* Glow effect on hover */}
-              <div className="absolute -inset-6 rounded-full bg-white/5 blur-2xl opacity-0 transition-opacity duration-500 hover:opacity-100 pointer-events-none" />
+              <div className="absolute -inset-3 rounded-full border border-zinc-800/50 transition-all duration-500 group-hover:border-zinc-700/50 group-hover:-inset-4" />
             </div>
 
             {/* Text Content */}
