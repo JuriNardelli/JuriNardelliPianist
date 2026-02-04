@@ -31,7 +31,7 @@ export function Hero() {
         className="fixed left-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-4 lg:flex"
       >
         <a
-          href="https://instagram.com"
+          href="https://www.instagram.com/jnpianist/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Instagram"
@@ -40,7 +40,7 @@ export function Hero() {
           <Instagram className="h-5 w-5" strokeWidth={1.5} />
         </a>
         <a
-          href="https://youtube.com"
+          href="https://www.youtube.com/channel/UCW__wlOO7iwwM2lGz8J8ywQ"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="YouTube"
@@ -49,7 +49,7 @@ export function Hero() {
           <Youtube className="h-5 w-5" strokeWidth={1.5} />
         </a>
         <a
-          href="https://tiktok.com"
+          href="https://www.tiktok.com/@jnpianist"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="TikTok"
