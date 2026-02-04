@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
+import { X, ZoomIn } from "lucide-react";
 
 const photos = [
   { src: "/bio/photo-stage-standing.jpg", alt: "On stage", caption: "The Stage", position: "object-top" },
@@ -40,136 +42,133 @@ const itemVariants = {
   },
 };
 
-export function PhotoGallery() {
+interface PhotoItemProps {
+  photo: typeof photos[0];
+  className?: string;
+  showCaption?: boolean;
+  onClick: () => void;
+}
+
+function PhotoItem({ photo, className = "", showCaption = true, onClick }: PhotoItemProps) {
   return (
-    <section className="bg-black py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <p className="text-sm font-light tracking-[0.3em] uppercase text-zinc-500">
-            Gallery
-          </p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Moments
-          </h2>
-          <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-zinc-600 to-transparent" />
-        </motion.div>
+    <motion.div
+      variants={itemVariants}
+      className={`group relative cursor-pointer overflow-hidden rounded-2xl ${className}`}
+      onClick={onClick}
+    >
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        fill
+        className={`object-cover transition-transform duration-700 group-hover:scale-110 ${photo.position}`}
+      />
+      <div className="absolute inset-0 bg-black/0 transition-all duration-500 group-hover:bg-black/40" />
 
-        {/* Masonry-style Bento Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6"
-        >
-          {/* Row 1 */}
-          <motion.div variants={itemVariants} className="group relative col-span-2 row-span-2 aspect-square overflow-hidden rounded-2xl md:aspect-auto md:h-full">
-            <Image src={photos[0].src} alt={photos[0].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[0].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="text-sm font-light tracking-widest text-white/90">{photos[0].caption}</p>
-            </div>
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="group relative col-span-2 aspect-[4/3] overflow-hidden rounded-2xl">
-            <Image src={photos[1].src} alt={photos[1].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[1].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="text-xs font-light tracking-widest text-white/90">{photos[1].caption}</p>
-            </div>
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="group relative col-span-1 aspect-square overflow-hidden rounded-2xl">
-            <Image src={photos[4].src} alt={photos[4].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[4].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="group relative col-span-1 aspect-square overflow-hidden rounded-2xl">
-            <Image src={photos[7].src} alt={photos[7].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[7].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          {/* Row 2 */}
-          <motion.div variants={itemVariants} className="group relative col-span-2 aspect-[16/9] overflow-hidden rounded-2xl">
-            <Image src={photos[2].src} alt={photos[2].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[2].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="text-xs font-light tracking-widest text-white/90">{photos[2].caption}</p>
-            </div>
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="group relative col-span-2 aspect-[16/9] overflow-hidden rounded-2xl">
-            <Image src={photos[5].src} alt={photos[5].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[5].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="text-xs font-light tracking-widest text-white/90">{photos[5].caption}</p>
-            </div>
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          {/* Row 3 */}
-          <motion.div variants={itemVariants} className="group relative col-span-1 aspect-square overflow-hidden rounded-2xl">
-            <Image src={photos[10].src} alt={photos[10].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[10].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="group relative col-span-1 aspect-square overflow-hidden rounded-2xl">
-            <Image src={photos[8].src} alt={photos[8].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[8].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="group relative col-span-2 aspect-[16/9] overflow-hidden rounded-2xl">
-            <Image src={photos[6].src} alt={photos[6].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[6].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="text-xs font-light tracking-widest text-white/90">{photos[6].caption}</p>
-            </div>
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="group relative col-span-2 aspect-[16/9] overflow-hidden rounded-2xl">
-            <Image src={photos[11].src} alt={photos[11].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[11].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="text-xs font-light tracking-widest text-white/90">{photos[11].caption}</p>
-            </div>
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          {/* Row 4 */}
-          <motion.div variants={itemVariants} className="group relative col-span-2 aspect-[4/3] overflow-hidden rounded-2xl md:col-span-3">
-            <Image src={photos[3].src} alt={photos[3].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[3].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="text-sm font-light tracking-widest text-white/90">{photos[3].caption}</p>
-            </div>
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="group relative col-span-2 aspect-[4/3] overflow-hidden rounded-2xl md:col-span-3">
-            <Image src={photos[9].src} alt={photos[9].alt} fill className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photos[9].position}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="text-sm font-light tracking-widest text-white/90">{photos[9].caption}</p>
-            </div>
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
-          </motion.div>
-        </motion.div>
+      {/* Zoom icon on hover */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        <div className="rounded-full bg-white/20 p-3 backdrop-blur-sm">
+          <ZoomIn className="h-6 w-6 text-white" />
+        </div>
       </div>
-    </section>
+
+      {showCaption && (
+        <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+          <p className="text-sm font-light tracking-widest text-white/90">{photo.caption}</p>
+        </div>
+      )}
+      <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+    </motion.div>
+  );
+}
+
+export function PhotoGallery() {
+  const [selectedPhoto, setSelectedPhoto] = useState<typeof photos[0] | null>(null);
+
+  return (
+    <>
+      <section className="bg-black py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16 text-center"
+          >
+            <p className="text-sm font-light tracking-[0.3em] uppercase text-zinc-500">
+              Gallery
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Moments
+            </h2>
+            <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-zinc-600 to-transparent" />
+          </motion.div>
+
+          {/* Masonry-style Bento Grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6"
+          >
+            <PhotoItem photo={photos[0]} className="col-span-2 row-span-2 aspect-square md:aspect-auto md:h-full" onClick={() => setSelectedPhoto(photos[0])} />
+            <PhotoItem photo={photos[1]} className="col-span-2 aspect-[4/3]" onClick={() => setSelectedPhoto(photos[1])} />
+            <PhotoItem photo={photos[4]} className="col-span-1 aspect-square" showCaption={false} onClick={() => setSelectedPhoto(photos[4])} />
+            <PhotoItem photo={photos[7]} className="col-span-1 aspect-square" showCaption={false} onClick={() => setSelectedPhoto(photos[7])} />
+            <PhotoItem photo={photos[2]} className="col-span-2 aspect-[16/9]" onClick={() => setSelectedPhoto(photos[2])} />
+            <PhotoItem photo={photos[5]} className="col-span-2 aspect-[16/9]" onClick={() => setSelectedPhoto(photos[5])} />
+            <PhotoItem photo={photos[10]} className="col-span-1 aspect-square" showCaption={false} onClick={() => setSelectedPhoto(photos[10])} />
+            <PhotoItem photo={photos[8]} className="col-span-1 aspect-square" showCaption={false} onClick={() => setSelectedPhoto(photos[8])} />
+            <PhotoItem photo={photos[6]} className="col-span-2 aspect-[16/9]" onClick={() => setSelectedPhoto(photos[6])} />
+            <PhotoItem photo={photos[11]} className="col-span-2 aspect-[16/9]" onClick={() => setSelectedPhoto(photos[11])} />
+            <PhotoItem photo={photos[3]} className="col-span-2 aspect-[4/3] md:col-span-3" onClick={() => setSelectedPhoto(photos[3])} />
+            <PhotoItem photo={photos[9]} className="col-span-2 aspect-[4/3] md:col-span-3" onClick={() => setSelectedPhoto(photos[9])} />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedPhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-xl"
+            onClick={() => setSelectedPhoto(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="relative max-h-[90vh] max-w-5xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={selectedPhoto.src}
+                alt={selectedPhoto.alt}
+                width={1200}
+                height={800}
+                className="max-h-[85vh] w-auto rounded-lg object-contain"
+              />
+              <p className="mt-4 text-center text-sm font-light tracking-widest text-zinc-400">
+                {selectedPhoto.caption}
+              </p>
+            </motion.div>
+
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedPhoto(null)}
+              className="absolute top-6 right-6 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

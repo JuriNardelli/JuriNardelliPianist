@@ -95,8 +95,11 @@ export function BiographyStory() {
         />
       </div>
 
-      {/* Chapters */}
-      <div className="mx-auto mt-24 max-w-6xl px-6">
+      {/* Chapters with Timeline */}
+      <div className="mx-auto mt-24 max-w-6xl px-6 relative">
+        {/* Vertical timeline line - hidden on mobile */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-zinc-800 to-transparent hidden md:block" />
+
         {chapters.map((chapter, index) => (
           <motion.div
             key={chapter.id}
@@ -104,13 +107,18 @@ export function BiographyStory() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInVariants}
-            className={`flex flex-col items-center gap-10 py-20 md:flex-row md:gap-20 ${
+            className={`relative flex flex-col items-center gap-10 py-20 md:flex-row md:gap-20 ${
               index % 2 === 1 ? "md:flex-row-reverse" : ""
             }`}
           >
-            {/* Circular Photo - LARGER */}
+            {/* Timeline dot - hidden on mobile */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
+              <div className="h-3 w-3 rounded-full bg-zinc-700 ring-4 ring-black" />
+            </div>
+
+            {/* Circular Photo */}
             <div className="relative flex-shrink-0">
-              <div className="relative h-64 w-64 overflow-hidden rounded-full border border-zinc-800 bg-zinc-900 sm:h-72 sm:w-72 lg:h-80 lg:w-80">
+              <div className="relative h-64 w-64 overflow-hidden rounded-full border border-zinc-800 bg-zinc-900 sm:h-72 sm:w-72 lg:h-80 lg:w-80 transition-transform duration-500 hover:scale-105">
                 <Image
                   src={chapter.image}
                   alt={chapter.title}
@@ -120,14 +128,16 @@ export function BiographyStory() {
               </div>
               {/* Decorative ring */}
               <div className="absolute -inset-3 rounded-full border border-zinc-800/50" />
+              {/* Glow effect on hover */}
+              <div className="absolute -inset-6 rounded-full bg-white/5 blur-2xl opacity-0 transition-opacity duration-500 hover:opacity-100 pointer-events-none" />
             </div>
 
             {/* Text Content */}
             <div className={`flex-1 ${index % 2 === 1 ? "md:text-right" : ""}`}>
-              <span className="text-sm font-light tracking-widest text-zinc-600">
+              <span className="inline-block px-3 py-1 text-xs font-light tracking-widest text-zinc-500 border border-zinc-800 rounded-full">
                 {chapter.year}
               </span>
-              <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
+              <h2 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">
                 {chapter.title}
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-zinc-400">
