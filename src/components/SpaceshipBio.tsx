@@ -68,11 +68,11 @@ function generateStars(count: number) {
 }
 
 const planetColors = [
-  { gradient: 'from-rose-400 to-pink-500', shadow: 'rgba(251,113,133,0.5)', ring: 'border-rose-400/30', text: 'text-rose-400', glow: 'from-rose-500/20 via-pink-500/15 to-rose-500/20' },
+  { gradient: 'from-cyan-400 to-blue-500', shadow: 'rgba(34,211,238,0.5)', ring: 'border-cyan-400/30', text: 'text-cyan-400', glow: 'from-cyan-500/20 via-blue-500/15 to-cyan-500/20' },
   { gradient: 'from-amber-400 to-orange-500', shadow: 'rgba(251,191,36,0.5)', ring: 'border-amber-400/30', text: 'text-amber-400', glow: 'from-amber-500/20 via-orange-500/15 to-amber-500/20' },
   { gradient: 'from-emerald-400 to-teal-500', shadow: 'rgba(52,211,153,0.5)', ring: 'border-emerald-400/30', text: 'text-emerald-400', glow: 'from-emerald-500/20 via-teal-500/15 to-emerald-500/20' },
-  { gradient: 'from-cyan-400 to-blue-500', shadow: 'rgba(34,211,238,0.5)', ring: 'border-cyan-400/30', text: 'text-cyan-400', glow: 'from-cyan-500/20 via-blue-500/15 to-cyan-500/20' },
   { gradient: 'from-violet-400 to-purple-500', shadow: 'rgba(167,139,250,0.5)', ring: 'border-violet-400/30', text: 'text-violet-400', glow: 'from-violet-500/20 via-purple-500/15 to-violet-500/20' },
+  { gradient: 'from-rose-400 to-pink-500', shadow: 'rgba(251,113,133,0.5)', ring: 'border-rose-400/30', text: 'text-rose-400', glow: 'from-rose-500/20 via-pink-500/15 to-rose-500/20' },
   { gradient: 'from-fuchsia-400 to-pink-500', shadow: 'rgba(232,121,249,0.5)', ring: 'border-fuchsia-400/30', text: 'text-fuchsia-400', glow: 'from-fuchsia-500/20 via-pink-500/15 to-fuchsia-500/20' },
 ];
 
@@ -161,7 +161,7 @@ export function SpaceshipBio() {
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
             The Story
           </h1>
-          <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-rose-500 via-cyan-500 to-fuchsia-500" />
+          <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-cyan-500 via-violet-500 to-fuchsia-500" />
         </motion.div>
 
         {/* Spaceship navigation - isolated container */}
@@ -172,7 +172,7 @@ export function SpaceshipBio() {
 
             {/* Progress line - rainbow gradient */}
             <motion.div
-              className="absolute top-1/2 left-4 h-px bg-gradient-to-r from-rose-500 via-amber-500 via-emerald-500 via-cyan-500 via-violet-500 to-fuchsia-500"
+              className="absolute top-1/2 left-4 h-px bg-gradient-to-r from-cyan-500 via-amber-500 via-emerald-500 via-violet-500 via-rose-500 to-fuchsia-500"
               initial={{ width: "0%" }}
               animate={{ width: `calc(${(activeChapter / (chapters.length - 1)) * 100}% * (100% - 32px) / 100%)` }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
