@@ -179,6 +179,9 @@ export function SpaceshipBio() {
               style={{ width: `${(activeChapter / (chapters.length - 1)) * (100 - 3)}%` }}
             />
 
+            {/* Mobile hint */}
+            <p className="text-xs text-zinc-600 text-center mb-2 md:hidden">Tap planets to navigate</p>
+
             {/* Planet/chapter indicators */}
             <div className="relative w-full flex justify-between items-center px-4">
               {chapters.map((chapter, index) => {
@@ -194,7 +197,7 @@ export function SpaceshipBio() {
                   >
                     {/* Planet */}
                     <div
-                      className={`w-4 h-4 sm:w-6 sm:h-6 rounded-full transition-all duration-500 ${
+                      className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full transition-all duration-500 ${
                         index === activeChapter
                           ? `bg-gradient-to-r ${color.gradient}`
                           : index < activeChapter
@@ -203,17 +206,17 @@ export function SpaceshipBio() {
                       }`}
                       style={index <= activeChapter ? { boxShadow: `0 0 20px ${color.shadow}` } : {}}
                     />
-                    {/* Planet ring for active */}
+                    {/* Planet ring for active - pulse on mobile to show it's tappable */}
                     {index === activeChapter && (
                       <motion.div
-                        className={`absolute inset-1 rounded-full border ${color.ring}`}
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                        className={`absolute inset-0 rounded-full border-2 ${color.ring}`}
+                        animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.2, 0.5] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                       />
                     )}
-                    {/* Label on hover */}
-                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      <span className="text-xs text-zinc-400">{chapter.year}</span>
+                    {/* Label - always visible on mobile for current */}
+                    <div className={`absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap ${index === activeChapter ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}>
+                      <span className="text-[10px] text-zinc-500">{chapter.year}</span>
                     </div>
                   </motion.button>
                 );
@@ -348,11 +351,11 @@ export function SpaceshipBio() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Next button - shows next planet's color on hover */}
+          {/* Next button - desktop only, hidden on mobile (sticky button instead) */}
           {activeChapter < chapters.length - 1 && (
             <motion.button
               onClick={nextChapter}
-              className={`mt-16 mx-auto flex flex-col items-center gap-2 text-zinc-500 transition-colors`}
+              className={`mt-16 mx-auto hidden md:flex flex-col items-center gap-2 text-zinc-500 transition-colors`}
               style={{ '--hover-color': planetColors[activeChapter + 1]?.shadow } as React.CSSProperties}
               whileHover={{ scale: 1.05, color: planetColors[activeChapter + 1]?.shadow.replace('0.5', '1') }}
               whileTap={{ scale: 0.95 }}
@@ -366,6 +369,9 @@ export function SpaceshipBio() {
               </motion.div>
             </motion.button>
           )}
+
+          {/* Mobile bottom padding for sticky button */}
+          <div className="h-24 md:hidden" />
         </div>
 
         {/* Closing quote */}
@@ -384,6 +390,27 @@ export function SpaceshipBio() {
           </motion.div>
         )}
       </div>
+
+      {/* Sticky mobile navigation - fixed at bottom */}
+      {activeChapter < chapters.length - 1 && (
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
+        >
+          <div className="bg-gradient-to-t from-black via-black/95 to-transparent pt-8 pb-6 px-6">
+            <motion.button
+              onClick={nextChapter}
+              className={`w-full flex items-center justify-center gap-3 rounded-full py-4 px-6 font-semibold text-black bg-gradient-to-r ${planetColors[activeChapter + 1]?.gradient}`}
+              style={{ boxShadow: `0 0 30px ${planetColors[activeChapter + 1]?.shadow}` }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span>Next: {chapters[activeChapter + 1]?.title}</span>
+              <ChevronDown className="w-5 h-5 rotate-[-90deg]" />
+            </motion.button>
+          </div>
+        </motion.div>
+      )}
     </section>
   );
 }
