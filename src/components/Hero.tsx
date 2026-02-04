@@ -72,12 +72,12 @@ export function Hero() {
             className="relative text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl"
           >
             <span className="relative">
-              <span className="absolute inset-0 text-white/20 blur-xl">Juri Nardelli</span>
-              <span className="relative text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.15)]">
+              <span className="absolute inset-0 bg-gradient-to-r from-amber-500/30 via-amber-300/30 to-amber-500/30 bg-clip-text text-transparent blur-2xl">Juri Nardelli</span>
+              <span className="relative bg-gradient-to-r from-zinc-200 via-white to-zinc-200 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.2)]">
                 Juri{" "}
-                <span className="bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-transparent">
-                  Nardelli
-                </span>
+              </span>
+              <span className="relative bg-gradient-to-br from-amber-200 via-amber-100 to-white bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.2)]">
+                Nardelli
               </span>
             </span>
           </motion.h1>
