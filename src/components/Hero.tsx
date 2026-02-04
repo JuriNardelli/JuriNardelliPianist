@@ -23,6 +23,11 @@ export function Hero() {
       {/* Subtle ambient gradient */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900/50 via-black to-black" />
 
+      {/* Corner gradients */}
+      <div className="pointer-events-none absolute top-0 left-0 h-96 w-96 bg-gradient-to-br from-zinc-800/30 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-96 w-96 bg-gradient-to-tl from-zinc-800/30 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute top-0 right-0 h-64 w-64 bg-gradient-to-bl from-zinc-700/20 via-transparent to-transparent" />
+
       {/* Social icons - top left */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -69,31 +74,19 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            className="relative overflow-visible"
+            className="relative"
           >
             {/* Glow layer */}
-            <div className="absolute inset-0 text-4xl font-bold leading-[1.1] tracking-tight text-white/20 blur-2xl sm:text-5xl lg:text-6xl">
+            <div className="absolute inset-0 text-5xl font-bold leading-[1.1] tracking-tight text-white/20 blur-2xl sm:text-6xl lg:text-7xl">
               Juri Nardelli
             </div>
 
             {/* Main title */}
-            <h1 className="relative text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="relative text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
               <span className="bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent drop-shadow-[0_4px_12px_rgba(255,255,255,0.25)]">
                 Juri Nardelli
               </span>
             </h1>
-
-            {/* Reflection - positioned and clipped */}
-            <div className="relative h-8 overflow-hidden sm:h-10 lg:h-12">
-              <div
-                className="absolute top-0 text-4xl font-bold leading-[1.1] tracking-tight opacity-40 sm:text-5xl lg:text-6xl"
-                style={{ transform: 'scaleY(-0.4)' }}
-              >
-                <span className="bg-gradient-to-b from-zinc-500 to-transparent bg-clip-text text-transparent">
-                  Juri Nardelli
-                </span>
-              </div>
-            </div>
           </motion.div>
 
           <motion.p
