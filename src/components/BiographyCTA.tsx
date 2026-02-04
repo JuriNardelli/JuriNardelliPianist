@@ -21,7 +21,7 @@ export function BiographyCTA() {
         </p>
         <a
           href="/academy"
-          className="mt-8 group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 px-8 py-4 text-sm font-semibold text-black transition-all duration-300 hover:from-amber-400 hover:to-amber-500 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)]"
+          className="mt-8 group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 px-8 py-4 text-sm font-semibold text-black transition-all duration-300 hover:from-cyan-400 hover:to-cyan-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.3)]"
         >
           Explore the Academy
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

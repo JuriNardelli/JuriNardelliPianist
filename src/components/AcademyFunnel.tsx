@@ -233,10 +233,11 @@ export function AcademyFunnel() {
                   <video
                     className="w-full h-auto"
                     controls
-                    preload="auto"
+                    preload="metadata"
+                    playsInline
                   >
-                    <source src="/leon-chopin.mov" type="video/quicktime" />
-                    <source src="/leon-chopin.mov" type="video/mp4" />
+                    <source src="/leon-chopin.mp4" type="video/mp4" />
+                    <source src="/leon-chopin.webm" type="video/webm" />
                   </video>
                 </div>
                 <p className="mt-4 text-zinc-500 text-sm">

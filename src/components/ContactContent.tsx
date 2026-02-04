@@ -48,7 +48,7 @@ export function ContactContent() {
             <span>Or email directly:</span>
             <a
               href="mailto:juri@jnpianist.com"
-              className="text-amber-500 hover:text-amber-400 transition-colors"
+              className="text-zinc-400 hover:text-white transition-colors"
             >
               juri@jnpianist.com
             </a>

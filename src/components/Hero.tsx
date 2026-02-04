@@ -81,7 +81,7 @@ export function Hero() {
         {shootingStars.map((star, i) => (
           <motion.div
             key={`shooting-${star.id}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-white to-cyan-400"
+            className="absolute h-px bg-gradient-to-r from-transparent via-white to-zinc-400"
             style={{
               width: "100px",
               top: `${10 + i * 15}%`,
@@ -301,7 +301,7 @@ export function Hero() {
             <div className="relative">
               {/* Animated glow */}
               <motion.div
-                className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-500/20 via-cyan-500/20 to-amber-500/20 blur-lg"
+                className="absolute -inset-1 rounded-full bg-gradient-to-r from-white/15 via-zinc-400/10 to-white/15 blur-lg"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               />
@@ -375,7 +375,7 @@ export function Hero() {
           <div className="relative">
             {/* Animated glow ring */}
             <motion.div
-              className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-500/20 via-cyan-500/20 to-amber-500/20 blur-xl"
+              className="absolute -inset-1 rounded-full bg-gradient-to-r from-white/15 via-zinc-400/10 to-white/15 blur-xl"
               animate={{
                 rotate: 360,
               }}

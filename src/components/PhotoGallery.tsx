@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { X, ZoomIn } from "lucide-react";
 
 const photos = [
@@ -83,6 +83,33 @@ function PhotoItem({ photo, className = "", showCaption = true, onClick }: Photo
 
 export function PhotoGallery() {
   const [selectedPhoto, setSelectedPhoto] = useState<typeof photos[0] | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const closeModal = useCallback(() => {
+    setSelectedPhoto(null);
+  }, []);
+
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && selectedPhoto) {
+        closeModal();
+      }
+    };
+
+    if (selectedPhoto) {
+      document.addEventListener("keydown", handleKeyDown);
+      // Focus the close button when modal opens for accessibility
+      setTimeout(() => closeButtonRef.current?.focus(), 100);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [selectedPhoto, closeModal]);
 
   return (
     <>
@@ -137,7 +164,10 @@ export function PhotoGallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-xl"
-            onClick={() => setSelectedPhoto(null)}
+            onClick={closeModal}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Photo lightbox"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
@@ -161,8 +191,10 @@ export function PhotoGallery() {
 
             {/* Close button */}
             <button
-              onClick={() => setSelectedPhoto(null)}
-              className="absolute top-6 right-6 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20"
+              ref={closeButtonRef}
+              onClick={closeModal}
+              className="absolute top-6 right-6 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50"
+              aria-label="Close photo (Escape)"
             >
               <X className="h-6 w-6" />
             </button>

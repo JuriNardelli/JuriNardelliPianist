@@ -162,7 +162,7 @@ export function SpaceshipBio() {
 
             {/* Progress line */}
             <motion.div
-              className="absolute top-1/2 left-4 h-px bg-gradient-to-r from-cyan-500 to-purple-500"
+              className="absolute top-1/2 left-4 h-px bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-400"
               initial={{ width: "0%" }}
               animate={{ width: `calc(${(activeChapter / (chapters.length - 1)) * 100}% * (100% - 32px) / 100%)` }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -175,15 +175,16 @@ export function SpaceshipBio() {
                 <motion.button
                   key={chapter.id}
                   onClick={() => navigateToChapter(index)}
-                  className={`relative group z-10 ${index === activeChapter ? 'scale-110' : ''}`}
+                  className={`relative group z-10 flex items-center justify-center min-w-[44px] min-h-[44px] ${index === activeChapter ? 'scale-110' : ''}`}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label={`Go to chapter: ${chapter.title} (${chapter.year})`}
                 >
                   {/* Planet */}
                   <div
                     className={`w-4 h-4 sm:w-6 sm:h-6 rounded-full transition-all duration-500 ${
                       index === activeChapter
-                        ? 'bg-gradient-to-r from-cyan-400 to-purple-500 shadow-[0_0_20px_rgba(34,211,238,0.5)]'
+                        ? 'bg-gradient-to-r from-cyan-400 to-teal-400 shadow-[0_0_20px_rgba(34,211,238,0.5)]'
                         : index < activeChapter
                         ? 'bg-zinc-600'
                         : 'bg-zinc-800 border border-zinc-700'
@@ -192,7 +193,7 @@ export function SpaceshipBio() {
                   {/* Planet ring for active */}
                   {index === activeChapter && (
                     <motion.div
-                      className="absolute -inset-2 rounded-full border border-cyan-400/30"
+                      className="absolute inset-1 rounded-full border border-cyan-400/30"
                       animate={{ rotate: 360 }}
                       transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                     />
@@ -230,7 +231,7 @@ export function SpaceshipBio() {
               {/* Engine glow */}
               {isFlying && (
                 <motion.div
-                  className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-2 bg-gradient-to-l from-cyan-400 via-orange-400 to-transparent rounded-full blur-sm"
+                  className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-2 bg-gradient-to-l from-cyan-400 via-blue-400 to-transparent rounded-full blur-sm"
                   animate={{ opacity: [0.5, 1, 0.5], scaleX: [1, 1.5, 1] }}
                   transition={{ duration: 0.2, repeat: 4 }}
                 />
@@ -254,10 +255,10 @@ export function SpaceshipBio() {
               {/* Photo */}
               <div className="relative flex-shrink-0">
                 {/* Static glow on mobile, animated on desktop */}
-                <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-amber-500/20 blur-2xl md:hidden" />
+                <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500/20 via-teal-400/15 to-blue-500/20 blur-2xl md:hidden" />
                 {!isMobile && (
                   <motion.div
-                    className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-amber-500/20 blur-2xl hidden md:block"
+                    className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500/20 via-teal-400/15 to-blue-500/20 blur-2xl hidden md:block"
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                   />
