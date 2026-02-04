@@ -97,8 +97,8 @@ export function BiographyStory() {
 
       {/* Chapters with Timeline */}
       <div className="mx-auto mt-24 max-w-6xl px-6 relative">
-        {/* Vertical timeline line - hidden on mobile */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-zinc-800 to-transparent hidden md:block" />
+        {/* Vertical timeline line - centered on desktop, left on mobile */}
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-zinc-800 to-transparent" />
 
         {chapters.map((chapter, index) => (
           <motion.div
@@ -107,12 +107,12 @@ export function BiographyStory() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInVariants}
-            className={`relative flex flex-col items-center gap-10 py-20 md:flex-row md:gap-20 ${
+            className={`relative flex flex-col items-center gap-10 py-20 pl-12 md:pl-0 md:flex-row md:gap-20 ${
               index % 2 === 1 ? "md:flex-row-reverse" : ""
             }`}
           >
-            {/* Timeline dot - hidden on mobile */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
+            {/* Timeline dot - left on mobile, centered on desktop */}
+            <div className="absolute left-6 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="h-3 w-3 rounded-full bg-zinc-700 ring-4 ring-black" />
             </div>
 
