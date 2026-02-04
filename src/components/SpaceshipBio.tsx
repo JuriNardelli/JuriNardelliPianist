@@ -328,7 +328,6 @@ export function SpaceshipBio() {
             </motion.button>
           )}
         </div>
-        </div>
 
         {/* Closing quote */}
         {activeChapter === chapters.length - 1 && (
