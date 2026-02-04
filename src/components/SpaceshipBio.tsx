@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState, useRef, useMemo, useEffect } from "react";
-import { Rocket, ChevronDown } from "lucide-react";
+import { Rocket, ChevronDown, ArrowRight } from "lucide-react";
 
 const chapters = [
   {
@@ -179,8 +179,11 @@ export function SpaceshipBio() {
               style={{ width: `${(activeChapter / (chapters.length - 1)) * (100 - 3)}%` }}
             />
 
-            {/* Mobile hint */}
-            <p className="text-xs text-zinc-600 text-center mb-2 md:hidden">Tap planets to navigate</p>
+            {/* Navigation hint */}
+            <p className="text-xs text-zinc-600 text-center mb-2 md:mb-4">
+              <span className="md:hidden">Tap planets to jump</span>
+              <span className="hidden md:inline">Click any planet to jump to that chapter</span>
+            </p>
 
             {/* Planet/chapter indicators */}
             <div className="relative w-full flex justify-between items-center px-4">
@@ -351,27 +354,36 @@ export function SpaceshipBio() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Next button - desktop only, hidden on mobile (sticky button instead) */}
+          {/* Next Chapter button - prominent, shows next chapter info */}
           {activeChapter < chapters.length - 1 && (
-            <motion.button
-              onClick={nextChapter}
-              className={`mt-16 mx-auto hidden md:flex flex-col items-center gap-2 text-zinc-500 transition-colors`}
-              style={{ '--hover-color': planetColors[activeChapter + 1]?.shadow } as React.CSSProperties}
-              whileHover={{ scale: 1.05, color: planetColors[activeChapter + 1]?.shadow.replace('0.5', '1') }}
-              whileTap={{ scale: 0.95 }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 md:mt-16 text-center"
             >
-              <span className="text-sm tracking-widest uppercase">Next Chapter</span>
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+              <p className="text-sm text-zinc-600 mb-4 hidden md:block">Continue the journey</p>
+              <motion.button
+                onClick={nextChapter}
+                className={`group inline-flex items-center gap-4 rounded-full py-4 px-8 font-semibold text-black bg-gradient-to-r ${planetColors[activeChapter + 1]?.gradient}`}
+                style={{ boxShadow: `0 0 30px ${planetColors[activeChapter + 1]?.shadow}` }}
+                whileHover={{ scale: 1.05, boxShadow: `0 0 50px ${planetColors[activeChapter + 1]?.shadow}` }}
+                whileTap={{ scale: 0.98 }}
               >
-                <ChevronDown className="w-6 h-6" />
-              </motion.div>
-            </motion.button>
+                <span className="hidden md:inline">Next:</span>
+                <span>{chapters[activeChapter + 1]?.title}</span>
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </motion.div>
+              </motion.button>
+            </motion.div>
           )}
 
           {/* Mobile bottom padding for sticky button */}
-          <div className="h-24 md:hidden" />
+          <div className="h-20 md:hidden" />
         </div>
 
         {/* Closing quote */}
@@ -406,7 +418,7 @@ export function SpaceshipBio() {
               whileTap={{ scale: 0.98 }}
             >
               <span>Next: {chapters[activeChapter + 1]?.title}</span>
-              <ChevronDown className="w-5 h-5 rotate-[-90deg]" />
+              <ArrowRight className="w-5 h-5" />
             </motion.button>
           </div>
         </motion.div>
