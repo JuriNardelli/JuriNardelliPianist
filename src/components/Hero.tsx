@@ -135,27 +135,107 @@ export function Hero() {
         />
       </div>
 
-      {/* Spiral Galaxy effect */}
+      {/* Spiral Galaxies */}
       <div className="pointer-events-none absolute inset-0">
+        {/* Large spiral galaxy */}
         <motion.div
-          className="absolute top-[15%] right-[20%] w-20 h-20"
+          className="absolute top-[12%] right-[15%] w-24 h-24"
           animate={{ rotate: 360 }}
-          transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
         >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400/30 via-transparent to-transparent blur-sm" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400/40 via-blue-400/20 to-transparent blur-md" />
+          <div className="absolute inset-3 rounded-full bg-gradient-to-r from-white/50 via-purple-300/30 to-transparent blur-sm" />
+          <div className="absolute inset-[40%] rounded-full bg-white/70 blur-[1px]" />
+        </motion.div>
+        {/* Medium galaxy - cyan */}
+        <motion.div
+          className="absolute bottom-[35%] left-[5%] w-16 h-16"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/35 via-teal-400/15 to-transparent blur-sm" />
           <div className="absolute inset-2 rounded-full bg-gradient-to-r from-white/40 via-transparent to-transparent blur-[2px]" />
           <div className="absolute inset-[35%] rounded-full bg-white/60 blur-[1px]" />
         </motion.div>
-        {/* Second smaller galaxy */}
+        {/* Small distant galaxy */}
         <motion.div
-          className="absolute bottom-[30%] left-[8%] w-12 h-12"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[55%] right-[8%] w-10 h-10"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 70, repeat: Infinity, ease: "linear" }}
         >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/25 via-transparent to-transparent blur-sm" />
-          <div className="absolute inset-2 rounded-full bg-gradient-to-r from-white/30 via-transparent to-transparent blur-[1px]" />
-          <div className="absolute inset-[35%] rounded-full bg-white/50 blur-[1px]" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400/25 via-transparent to-transparent blur-sm" />
+          <div className="absolute inset-[30%] rounded-full bg-white/40 blur-[1px]" />
         </motion.div>
+      </div>
+
+      {/* Planets */}
+      <div className="pointer-events-none absolute inset-0">
+        {/* Large planet with rings (Saturn-like) */}
+        <div className="absolute top-[8%] left-[12%]">
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="relative"
+          >
+            {/* Planet body */}
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-300/60 via-amber-600/40 to-amber-900/30 shadow-[inset_-3px_-3px_8px_rgba(0,0,0,0.5)]" />
+            {/* Ring */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-3 border border-amber-400/30 rounded-full rotate-[-20deg]" />
+          </motion.div>
+        </div>
+
+        {/* Blue gas giant */}
+        <motion.div
+          className="absolute bottom-[15%] right-[18%]"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-400/50 via-blue-500/40 to-indigo-800/30 shadow-[inset_-2px_-2px_6px_rgba(0,0,0,0.5)]" />
+          {/* Atmosphere glow */}
+          <div className="absolute -inset-1 rounded-full bg-cyan-400/20 blur-sm -z-10" />
+        </motion.div>
+
+        {/* Small red planet */}
+        <motion.div
+          className="absolute top-[40%] left-[3%]"
+          animate={{ y: [0, -4, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        >
+          <div className="w-4 h-4 rounded-full bg-gradient-to-br from-rose-400/50 via-red-600/40 to-red-900/30 shadow-[inset_-1px_-1px_4px_rgba(0,0,0,0.5)]" />
+        </motion.div>
+
+        {/* Purple distant planet */}
+        <motion.div
+          className="absolute top-[70%] right-[30%]"
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        >
+          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-purple-400/40 via-violet-600/30 to-purple-900/20" />
+        </motion.div>
+
+        {/* Green planet */}
+        <motion.div
+          className="absolute top-[25%] right-[40%]"
+          animate={{ y: [0, -3, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        >
+          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-emerald-400/40 via-teal-600/30 to-cyan-900/20" />
+        </motion.div>
+      </div>
+
+      {/* Asteroid belt hint */}
+      <div className="pointer-events-none absolute top-[45%] left-0 right-0 h-px">
+        <div className="absolute inset-0 flex justify-around">
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={`asteroid-${i}`}
+              className="w-1 h-1 rounded-full bg-zinc-500/40"
+              style={{ marginTop: Math.random() * 20 - 10 }}
+              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Star clusters */}

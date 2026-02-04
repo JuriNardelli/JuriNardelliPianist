@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Check, Music, Users, MessageCircle, Award, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { ApplicationForm } from "./ApplicationForm";
+import { SpaceBackground } from "./SpaceBackground";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
@@ -52,10 +53,11 @@ const steps = [
 
 export function AcademyFunnel() {
   return (
-    <div className="min-h-screen">
+    <div className="relative min-h-screen">
+      <SpaceBackground variant="warm" intensity="normal" />
+
       {/* Hero Section */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-900/10 via-black to-black" />
+      <section className="relative z-10 flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20">
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <motion.p
@@ -108,7 +110,7 @@ export function AcademyFunnel() {
       </section>
 
       {/* Pain Points Section */}
-      <section className="border-t border-zinc-900 py-24">
+      <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-4xl px-6">
           <motion.div
             initial="hidden"
@@ -159,7 +161,7 @@ export function AcademyFunnel() {
       </section>
 
       {/* About / Value Proposition */}
-      <section className="border-t border-zinc-900 py-24">
+      <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
             <motion.div
@@ -217,7 +219,7 @@ export function AcademyFunnel() {
       </section>
 
       {/* Features Section */}
-      <section className="border-t border-zinc-900 py-24">
+      <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-6xl px-6">
           <motion.div
             initial="hidden"
@@ -266,7 +268,7 @@ export function AcademyFunnel() {
       </section>
 
       {/* Process Section */}
-      <section className="border-t border-zinc-900 py-24">
+      <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-4xl px-6">
           <motion.div
             initial="hidden"
@@ -315,7 +317,7 @@ export function AcademyFunnel() {
       </section>
 
       {/* Video Testimonial Section */}
-      <section className="border-t border-zinc-900 py-24">
+      <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-5xl px-6">
           <motion.div
             initial="hidden"
@@ -386,7 +388,7 @@ export function AcademyFunnel() {
       </section>
 
       {/* FAQ Section */}
-      <section className="border-t border-zinc-900 py-24">
+      <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-3xl px-6">
           <motion.div
             initial="hidden"
@@ -449,7 +451,7 @@ export function AcademyFunnel() {
       </section>
 
       {/* Application Form Section */}
-      <section id="apply" className="border-t border-zinc-900 py-24">
+      <section id="apply" className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-3xl px-6">
           <motion.div
             initial="hidden"

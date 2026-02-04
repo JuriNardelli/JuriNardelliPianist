@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
-import { Mail } from "lucide-react";
+import { ContactContent } from "@/components/ContactContent";
 
 export const metadata = {
   title: "Contact | Juri Nardelli",
@@ -13,37 +13,8 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-black pt-32 pb-24">
-        <div className="mx-auto max-w-2xl px-6">
-          <div className="text-center">
-            <p className="text-sm font-light tracking-[0.3em] uppercase text-zinc-500">
-              Get in Touch
-            </p>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Contact
-            </h1>
-            <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-zinc-600 to-transparent" />
-            <p className="mx-auto mt-6 max-w-md text-lg text-zinc-400">
-              Have a question or want to work together? Send me a message and I'll get back to you soon.
-            </p>
-
-            {/* Direct Email */}
-            <div className="mt-8 flex items-center justify-center gap-2 text-zinc-400">
-              <Mail className="h-4 w-4" />
-              <span>Or email directly:</span>
-              <a
-                href="mailto:juri@jnpianist.com"
-                className="text-amber-500 hover:text-amber-400 transition-colors"
-              >
-                juri@jnpianist.com
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-12">
-            <ContactForm />
-          </div>
-        </div>
+      <main className="bg-black">
+        <ContactContent />
       </main>
       <Footer />
     </>
