@@ -18,7 +18,7 @@ const chapters = [
     id: 2,
     title: "First Keys",
     year: "Childhood",
-    text: "I touched the piano for the first time as a child. What started as curiosity quickly transformed into obsession. Hours would pass unnoticed as I discovered the infinite world hidden within 88 keys.",
+    text: "I touched the piano for the first time as a child. What started as curiosity quickly transformed into obsession. At age 8, I met my first teacher — the mentor who shaped me into a musician. I owe him everything. His guidance is the reason I now dedicate myself to teaching: to give back what was so generously given to me.",
     image: "/bio/chapter-2.jpg",
     imagePosition: "object-top",
   },
