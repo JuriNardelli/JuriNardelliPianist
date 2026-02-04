@@ -69,16 +69,10 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            className="relative text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl"
+            className="text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl"
           >
-            <span className="relative">
-              <span className="absolute inset-0 bg-gradient-to-r from-amber-500/30 via-amber-300/30 to-amber-500/30 bg-clip-text text-transparent blur-2xl">Juri Nardelli</span>
-              <span className="relative bg-gradient-to-r from-zinc-200 via-white to-zinc-200 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.2)]">
-                Juri{" "}
-              </span>
-              <span className="relative bg-gradient-to-br from-amber-200 via-amber-100 to-white bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.2)]">
-                Nardelli
-              </span>
+            <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+              Juri Nardelli
             </span>
           </motion.h1>
 
