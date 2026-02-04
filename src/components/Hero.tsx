@@ -61,9 +61,9 @@ export function Hero() {
         </a>
       </motion.div>
 
-      <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-16 px-8 py-24 lg:grid-cols-2 lg:px-16">
+      <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-8 px-8 py-24 lg:grid-cols-2 lg:gap-16 lg:px-16">
         {/* Left: Content */}
-        <div className="relative z-10 flex flex-col">
+        <div className="relative z-10 flex flex-col order-2 lg:order-1">
           <motion.h1
             custom={0}
             initial="hidden"
@@ -87,13 +87,34 @@ export function Hero() {
             Concert Pianist · Educator · MMA Piano Performance
           </motion.p>
 
+          {/* Mobile Image - shown only on mobile, between text and CTAs */}
+          <motion.div
+            custom={2}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUpVariants}
+            className="relative mt-8 flex items-center justify-center lg:hidden"
+          >
+            <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden rounded-3xl">
+              <Image
+                src="/portrait.jpg"
+                alt="Juri Nardelli"
+                fill
+                className="object-cover object-top"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+              <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
+            </div>
+          </motion.div>
+
           {/* CTAs */}
           <motion.div
             custom={3}
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-8 flex flex-wrap items-center justify-center gap-4 lg:mt-10 lg:justify-start"
           >
             <a
               href="/biography"
@@ -111,13 +132,13 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Right: Image */}
+        {/* Right: Image - desktop only */}
         <motion.div
           custom={1}
           initial="hidden"
           animate="visible"
           variants={fadeUpVariants}
-          className="relative flex items-center justify-center lg:justify-end"
+          className="relative hidden items-center justify-center lg:flex lg:justify-end order-1 lg:order-2"
         >
           <div className="relative aspect-[3/4] w-full max-w-lg overflow-hidden rounded-3xl">
             <Image
