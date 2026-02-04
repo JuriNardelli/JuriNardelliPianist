@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
-import { SpaceBackground } from "./SpaceBackground";
 import { ContactForm } from "./ContactForm";
 
 const fadeIn = {
@@ -17,7 +16,8 @@ const fadeIn = {
 export function ContactContent() {
   return (
     <div className="relative min-h-screen pt-32 pb-24">
-      <SpaceBackground variant="cool" intensity="light" />
+      {/* Simple gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 via-black to-black" />
 
       <div className="relative z-10 mx-auto max-w-2xl px-6">
         <motion.div
@@ -26,13 +26,13 @@ export function ContactContent() {
           variants={fadeIn}
           className="text-center"
         >
-          <p className="text-sm font-light tracking-[0.3em] uppercase text-cyan-400/80">
+          <p className="text-sm font-light tracking-[0.3em] uppercase text-zinc-500">
             Get in Touch
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
             Contact
           </h1>
-          <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+          <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-zinc-600 to-transparent" />
           <p className="mx-auto mt-6 max-w-md text-lg text-zinc-400">
             Have a question or want to work together? Send me a message and I'll get back to you soon.
           </p>
@@ -48,7 +48,7 @@ export function ContactContent() {
             <span>Or email directly:</span>
             <a
               href="mailto:juri@jnpianist.com"
-              className="text-cyan-400 hover:text-cyan-300 transition-colors"
+              className="text-amber-500 hover:text-amber-400 transition-colors"
             >
               juri@jnpianist.com
             </a>

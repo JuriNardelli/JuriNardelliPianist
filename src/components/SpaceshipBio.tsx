@@ -253,12 +253,16 @@ export function SpaceshipBio() {
             >
               {/* Photo */}
               <div className="relative flex-shrink-0">
-                <motion.div
-                  className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-amber-500/20 blur-2xl"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                />
-                <div className="relative h-64 w-64 sm:h-72 sm:w-72 lg:h-80 lg:w-80 overflow-hidden rounded-full border-2 border-cyan-500/30">
+                {/* Static glow on mobile, animated on desktop */}
+                <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-amber-500/20 blur-2xl md:hidden" />
+                {!isMobile && (
+                  <motion.div
+                    className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-amber-500/20 blur-2xl hidden md:block"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  />
+                )}
+                <div className="relative h-56 w-56 sm:h-64 sm:w-64 lg:h-80 lg:w-80 overflow-hidden rounded-full border-2 border-cyan-500/30">
                   <Image
                     src={currentChapter.image}
                     alt={currentChapter.title}
@@ -267,17 +271,21 @@ export function SpaceshipBio() {
                   />
                   <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10" />
                 </div>
-                {/* Orbital rings */}
-                <motion.div
-                  className="absolute -inset-6 rounded-full border border-dashed border-cyan-500/20"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                  className="absolute -inset-10 rounded-full border border-dotted border-purple-500/10"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-                />
+                {/* Orbital rings - desktop only */}
+                {!isMobile && (
+                  <>
+                    <motion.div
+                      className="absolute -inset-6 rounded-full border border-dashed border-cyan-500/20 hidden md:block"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    />
+                    <motion.div
+                      className="absolute -inset-10 rounded-full border border-dotted border-purple-500/10 hidden md:block"
+                      animate={{ rotate: -360 }}
+                      transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+                    />
+                  </>
+                )}
               </div>
 
               {/* Text */}

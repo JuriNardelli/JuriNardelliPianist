@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Check, Music, Users, MessageCircle, Award, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { ApplicationForm } from "./ApplicationForm";
-import { SpaceBackground } from "./SpaceBackground";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
@@ -54,7 +53,30 @@ const steps = [
 export function AcademyFunnel() {
   return (
     <div className="relative min-h-screen">
-      <SpaceBackground variant="warm" intensity="normal" />
+      {/* Elegant animated background */}
+      <div className="fixed inset-0 bg-black">
+        <motion.div
+          className="absolute top-0 left-0 w-full h-full"
+          animate={{
+            background: [
+              "radial-gradient(ellipse at 20% 20%, rgba(245,158,11,0.08) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 80% 80%, rgba(245,158,11,0.08) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 20% 80%, rgba(245,158,11,0.08) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 80% 20%, rgba(245,158,11,0.08) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 20% 20%, rgba(245,158,11,0.08) 0%, transparent 50%)",
+            ]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: "linear-gradient(rgba(245,158,11,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(245,158,11,0.3) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
+      </div>
 
       {/* Hero Section */}
       <section className="relative z-10 flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20">
@@ -77,9 +99,14 @@ export function AcademyFunnel() {
           >
             Transform Your Playing
             <br />
-            <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">
+            <motion.span
+              className="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent"
+              animate={{ backgroundPosition: ["0% center", "100% center", "0% center"] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              style={{ backgroundSize: "200% 100%" }}
+            >
               With Expert Guidance
-            </span>
+            </motion.span>
           </motion.h1>
 
           <motion.p
@@ -98,13 +125,21 @@ export function AcademyFunnel() {
             variants={fadeIn}
             className="mt-10"
           >
-            <a
+            <motion.a
               href="#apply"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 px-8 py-4 text-sm font-semibold text-black transition-all duration-300 hover:from-amber-400 hover:to-amber-500 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)]"
+              className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 px-8 py-4 text-sm font-semibold text-black overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
             >
-              Start Now
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400"
+                animate={{ x: ["-100%", "100%"] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                style={{ opacity: 0.5 }}
+              />
+              <span className="relative z-10">Start Now</span>
+              <ArrowRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </motion.a>
           </motion.div>
         </div>
       </section>
@@ -250,17 +285,31 @@ export function AcademyFunnel() {
               <motion.div
                 key={index}
                 variants={fadeIn}
-                className="group rounded-2xl border border-zinc-800/50 bg-zinc-900/30 p-8 transition-all duration-300 hover:border-amber-500/30 hover:bg-zinc-900/50"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="group relative rounded-2xl border border-zinc-800/50 bg-zinc-900/30 p-8 cursor-pointer overflow-hidden"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 text-amber-500 transition-colors group-hover:bg-amber-500/20">
-                  <feature.icon className="h-6 w-6" />
+                {/* Hover glow effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                />
+                <div className="relative z-10">
+                  <motion.div
+                    className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 text-amber-500"
+                    whileHover={{ rotate: [0, -10, 10, 0] }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <feature.icon className="h-6 w-6" />
+                  </motion.div>
+                  <h3 className="mt-6 text-xl font-semibold text-white group-hover:text-amber-50 transition-colors">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-3 text-zinc-400 group-hover:text-zinc-300 transition-colors">
+                    {feature.description}
+                  </p>
                 </div>
-                <h3 className="mt-6 text-xl font-semibold text-white">
-                  {feature.title}
-                </h3>
-                <p className="mt-3 text-zinc-400">
-                  {feature.description}
-                </p>
+                {/* Border glow on hover */}
+                <div className="absolute inset-0 rounded-2xl border border-amber-500/0 group-hover:border-amber-500/40 transition-colors duration-300" />
               </motion.div>
             ))}
           </motion.div>

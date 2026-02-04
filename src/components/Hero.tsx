@@ -101,184 +101,52 @@ export function Hero() {
         ))}
       </div>
 
-      {/* Nebula clouds - enhanced */}
+      {/* Subtle moving nebula - monochrome */}
       <div className="pointer-events-none absolute inset-0">
-        {/* Large purple nebula */}
         <motion.div
-          animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-1/4 -left-1/4 h-[700px] w-[700px] rounded-full bg-gradient-to-br from-purple-800/40 via-violet-900/30 to-transparent blur-3xl"
-        />
-        {/* Pink/magenta nebula accent */}
-        <motion.div
-          animate={{ x: [0, -30, 0], y: [0, 20, 0], scale: [1, 1.2, 1] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] left-[5%] h-[400px] w-[400px] rounded-full bg-gradient-to-r from-pink-900/25 via-fuchsia-900/20 to-transparent blur-3xl"
-        />
-        {/* Orange/amber nebula */}
-        <motion.div
-          animate={{ x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.15, 1] }}
-          transition={{ duration: 35, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-1/4 -right-1/4 h-[800px] w-[800px] rounded-full bg-gradient-to-l from-amber-800/25 via-orange-900/20 to-transparent blur-3xl"
-        />
-        {/* Cyan/teal nebula */}
-        <motion.div
-          animate={{ x: [0, 30, 0], y: [0, -50, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 left-1/2 h-[500px] w-[500px] rounded-full bg-gradient-to-r from-cyan-800/25 via-teal-900/20 to-transparent blur-3xl"
-        />
-        {/* Blue nebula streak */}
-        <motion.div
-          animate={{ x: [0, 20, 0], y: [0, -30, 0], rotate: [0, 5, 0] }}
+          animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
           transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[20%] right-[10%] h-[300px] w-[600px] rounded-full bg-gradient-to-l from-blue-800/20 via-indigo-900/15 to-transparent blur-3xl rotate-45"
+          className="absolute -top-1/4 -left-1/4 h-[800px] w-[800px] rounded-full bg-gradient-to-br from-white/[0.03] via-zinc-500/[0.02] to-transparent blur-3xl"
+        />
+        <motion.div
+          animate={{ x: [0, -80, 0], y: [0, 60, 0] }}
+          transition={{ duration: 50, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -bottom-1/4 -right-1/4 h-[900px] w-[900px] rounded-full bg-gradient-to-tl from-white/[0.02] via-zinc-600/[0.015] to-transparent blur-3xl"
+        />
+        <motion.div
+          animate={{ x: [0, 60, 0], y: [0, -40, 0] }}
+          transition={{ duration: 35, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/3 left-1/2 h-[600px] w-[600px] rounded-full bg-gradient-to-r from-zinc-400/[0.02] to-transparent blur-3xl"
         />
       </div>
 
-      {/* Spiral Galaxies */}
+      {/* Floating particles - subtle movement */}
       <div className="pointer-events-none absolute inset-0">
-        {/* Large spiral galaxy */}
-        <motion.div
-          className="absolute top-[12%] right-[15%] w-24 h-24"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400/40 via-blue-400/20 to-transparent blur-md" />
-          <div className="absolute inset-3 rounded-full bg-gradient-to-r from-white/50 via-purple-300/30 to-transparent blur-sm" />
-          <div className="absolute inset-[40%] rounded-full bg-white/70 blur-[1px]" />
-        </motion.div>
-        {/* Medium galaxy - cyan */}
-        <motion.div
-          className="absolute bottom-[35%] left-[5%] w-16 h-16"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/35 via-teal-400/15 to-transparent blur-sm" />
-          <div className="absolute inset-2 rounded-full bg-gradient-to-r from-white/40 via-transparent to-transparent blur-[2px]" />
-          <div className="absolute inset-[35%] rounded-full bg-white/60 blur-[1px]" />
-        </motion.div>
-        {/* Small distant galaxy */}
-        <motion.div
-          className="absolute top-[55%] right-[8%] w-10 h-10"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 70, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400/25 via-transparent to-transparent blur-sm" />
-          <div className="absolute inset-[30%] rounded-full bg-white/40 blur-[1px]" />
-        </motion.div>
-      </div>
-
-      {/* Planets */}
-      <div className="pointer-events-none absolute inset-0">
-        {/* Large planet with rings (Saturn-like) */}
-        <div className="absolute top-[8%] left-[12%]">
+        {[...Array(20)].map((_, i) => (
           <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="relative"
-          >
-            {/* Planet body */}
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-300/60 via-amber-600/40 to-amber-900/30 shadow-[inset_-3px_-3px_8px_rgba(0,0,0,0.5)]" />
-            {/* Ring */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-3 border border-amber-400/30 rounded-full rotate-[-20deg]" />
-          </motion.div>
-        </div>
-
-        {/* Blue gas giant */}
-        <motion.div
-          className="absolute bottom-[15%] right-[18%]"
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-400/50 via-blue-500/40 to-indigo-800/30 shadow-[inset_-2px_-2px_6px_rgba(0,0,0,0.5)]" />
-          {/* Atmosphere glow */}
-          <div className="absolute -inset-1 rounded-full bg-cyan-400/20 blur-sm -z-10" />
-        </motion.div>
-
-        {/* Small red planet */}
-        <motion.div
-          className="absolute top-[40%] left-[3%]"
-          animate={{ y: [0, -4, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        >
-          <div className="w-4 h-4 rounded-full bg-gradient-to-br from-rose-400/50 via-red-600/40 to-red-900/30 shadow-[inset_-1px_-1px_4px_rgba(0,0,0,0.5)]" />
-        </motion.div>
-
-        {/* Purple distant planet */}
-        <motion.div
-          className="absolute top-[70%] right-[30%]"
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        >
-          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-purple-400/40 via-violet-600/30 to-purple-900/20" />
-        </motion.div>
-
-        {/* Green planet */}
-        <motion.div
-          className="absolute top-[25%] right-[40%]"
-          animate={{ y: [0, -3, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        >
-          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-emerald-400/40 via-teal-600/30 to-cyan-900/20" />
-        </motion.div>
+            key={`particle-${i}`}
+            className="absolute w-1 h-1 rounded-full bg-white/30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.1, 0.4, 0.1],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 4,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
       </div>
 
-      {/* Asteroid belt hint */}
-      <div className="pointer-events-none absolute top-[45%] left-0 right-0 h-px">
-        <div className="absolute inset-0 flex justify-around">
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={`asteroid-${i}`}
-              className="w-1 h-1 rounded-full bg-zinc-500/40"
-              style={{ marginTop: Math.random() * 20 - 10 }}
-              animate={{ opacity: [0.2, 0.5, 0.2] }}
-              transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Star clusters */}
-      <div className="pointer-events-none absolute inset-0">
-        {/* Bright star cluster 1 */}
-        <div className="absolute top-[25%] left-[15%]">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={`cluster1-${i}`}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: Math.random() * 2 + 1,
-                height: Math.random() * 2 + 1,
-                left: Math.random() * 30 - 15,
-                top: Math.random() * 30 - 15,
-              }}
-              animate={{ opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 2 + Math.random() * 2, repeat: Infinity, delay: Math.random() }}
-            />
-          ))}
-        </div>
-        {/* Bright star cluster 2 */}
-        <div className="absolute bottom-[20%] right-[12%]">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={`cluster2-${i}`}
-              className="absolute rounded-full bg-cyan-200"
-              style={{
-                width: Math.random() * 2 + 1,
-                height: Math.random() * 2 + 1,
-                left: Math.random() * 25 - 12,
-                top: Math.random() * 25 - 12,
-              }}
-              animate={{ opacity: [0.3, 0.9, 0.3] }}
-              transition={{ duration: 2.5 + Math.random() * 2, repeat: Infinity, delay: Math.random() }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Mouse-following galaxy glow */}
+      {/* Mouse-following subtle glow */}
       <motion.div
-        className="pointer-events-none absolute h-[500px] w-[500px] rounded-full"
+        className="pointer-events-none absolute h-[400px] w-[400px] rounded-full hidden lg:block"
         animate={{
           left: `${mousePosition.x}%`,
           top: `${mousePosition.y}%`,
@@ -286,82 +154,37 @@ export function Hero() {
         transition={{ type: "spring", damping: 30, stiffness: 200 }}
         style={{ transform: "translate(-50%, -50%)" }}
       >
-        <div className="h-full w-full rounded-full bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-amber-500/10 blur-3xl" />
+        <div className="h-full w-full rounded-full bg-white/[0.03] blur-3xl" />
       </motion.div>
 
-      {/* Distant galaxies and bright stars */}
+      {/* Bright stars - white only */}
       <div className="pointer-events-none absolute inset-0">
-        {/* Bright pulsing stars */}
         <motion.div
           className="absolute top-[12%] right-[30%] h-1.5 w-1.5 rounded-full bg-white"
-          animate={{ scale: [1, 2, 1], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 3, repeat: Infinity }}
+          animate={{ scale: [1, 1.8, 1], opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity }}
         />
         <motion.div
-          className="absolute top-[45%] left-[5%] h-2 w-2 rounded-full bg-cyan-300"
-          animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0.9, 0.4] }}
-          transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+          className="absolute top-[45%] left-[8%] h-1 w-1 rounded-full bg-white"
+          animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.6, 0.2] }}
+          transition={{ duration: 5, repeat: Infinity, delay: 1 }}
         />
         <motion.div
-          className="absolute bottom-[35%] right-[8%] h-1.5 w-1.5 rounded-full bg-amber-300"
-          animate={{ scale: [1, 1.6, 1], opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
-        />
-        <motion.div
-          className="absolute top-[70%] left-[25%] h-1 w-1 rounded-full bg-purple-300"
-          animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.7, 0.3] }}
-          transition={{ duration: 5, repeat: Infinity, delay: 1.5 }}
-        />
-        <motion.div
-          className="absolute top-[8%] left-[40%] h-1 w-1 rounded-full bg-pink-300"
-          animate={{ scale: [1, 2, 1], opacity: [0.3, 0.8, 0.3] }}
+          className="absolute bottom-[30%] right-[15%] h-1 w-1 rounded-full bg-white"
+          animate={{ scale: [1, 1.6, 1], opacity: [0.2, 0.7, 0.2] }}
           transition={{ duration: 4.5, repeat: Infinity, delay: 2 }}
-        />
-        {/* Distant galaxy blurs */}
-        <motion.div
-          className="absolute top-[55%] right-[18%] h-3 w-6 rounded-full bg-gradient-to-r from-purple-400/30 to-blue-400/20 blur-[2px] rotate-45"
-          animate={{ opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-[15%] left-[35%] h-2 w-4 rounded-full bg-gradient-to-r from-amber-400/25 to-orange-400/15 blur-[2px] -rotate-30"
-          animate={{ opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 7, repeat: Infinity, delay: 2 }}
         />
       </div>
 
-      {/* Milky Way band - prominent */}
+      {/* Subtle diagonal light band */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Main milky way band */}
-        <div className="absolute top-[10%] -left-[20%] w-[150%] h-[60%] -rotate-[25deg] origin-center">
-          {/* Core glow */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/[0.08] to-transparent blur-3xl" />
-          {/* Bright center */}
-          <div className="absolute top-[35%] left-[30%] w-[40%] h-[30%] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent blur-2xl" />
-          {/* Star dust particles */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/[0.04] to-transparent blur-2xl translate-y-4" />
-        </div>
-        {/* Secondary dust lane */}
-        <div className="absolute top-[5%] -left-[10%] w-[120%] h-[50%] -rotate-[20deg]">
-          <div className="h-full w-full bg-gradient-to-b from-transparent via-blue-400/[0.05] to-transparent blur-3xl" />
-        </div>
-        {/* Bright star concentration in milky way */}
-        <div className="absolute top-[25%] left-[20%] w-[60%] h-[20%] -rotate-[25deg]">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={`mw-star-${i}`}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: Math.random() * 1.5 + 0.5,
-                height: Math.random() * 1.5 + 0.5,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{ opacity: [0.2, 0.8, 0.2] }}
-              transition={{ duration: 2 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 2 }}
-            />
-          ))}
-        </div>
+        <motion.div
+          className="absolute top-[5%] -left-[20%] w-[150%] h-[50%] -rotate-[20deg] origin-center"
+          animate={{ opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.015] to-transparent blur-3xl" />
+        </motion.div>
       </div>
 
       {/* Subtle grid pattern overlay */}
