@@ -179,10 +179,10 @@ export function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUpVariants}
-          className="relative hidden items-center justify-center lg:flex lg:justify-end order-1 lg:order-2"
+          className="relative hidden items-center justify-center lg:flex order-1 lg:order-2"
         >
           <div className="relative">
-            <div className="relative h-80 w-80 overflow-hidden rounded-full border border-zinc-800 xl:h-96 xl:w-96">
+            <div className="relative h-[28rem] w-[28rem] overflow-hidden rounded-full border border-zinc-800 xl:h-[32rem] xl:w-[32rem]">
               <Image
                 src="/portrait.jpg"
                 alt="Juri Nardelli"
