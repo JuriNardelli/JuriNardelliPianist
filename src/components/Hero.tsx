@@ -1,0 +1,138 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowRight, Instagram, Youtube } from "lucide-react";
+import Image from "next/image";
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      delay: i * 0.15,
+      ease: "easeOut" as const,
+    },
+  }),
+};
+
+export function Hero() {
+  return (
+    <section className="relative min-h-screen overflow-hidden bg-black">
+      {/* Subtle ambient gradient */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900/50 via-black to-black" />
+
+      {/* Social icons - top left */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="fixed left-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-4 lg:flex"
+      >
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          className="text-zinc-600 transition-colors hover:text-white"
+        >
+          <Instagram className="h-5 w-5" strokeWidth={1.5} />
+        </a>
+        <a
+          href="https://youtube.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="YouTube"
+          className="text-zinc-600 transition-colors hover:text-white"
+        >
+          <Youtube className="h-5 w-5" strokeWidth={1.5} />
+        </a>
+        <a
+          href="https://tiktok.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="TikTok"
+          className="text-zinc-600 transition-colors hover:text-white"
+        >
+          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+          </svg>
+        </a>
+      </motion.div>
+
+      <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-16 px-8 py-24 lg:grid-cols-2 lg:px-16">
+        {/* Left: Content */}
+        <div className="relative z-10 flex flex-col">
+          <motion.h1
+            custom={0}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUpVariants}
+            className="text-5xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl"
+          >
+            Juri{" "}
+            <span className="bg-gradient-to-r from-white via-zinc-300 to-zinc-500 bg-clip-text text-transparent">
+              Nardelli
+            </span>
+          </motion.h1>
+
+          <motion.p
+            custom={1}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUpVariants}
+            className="mt-4 text-base font-light tracking-widest text-zinc-500 sm:text-lg"
+          >
+            Concert Pianist · Educator · MMA Piano Performance
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            custom={3}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUpVariants}
+            className="mt-10 flex flex-wrap items-center gap-4"
+          >
+            <a
+              href="/biography"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900/80 px-7 py-3.5 text-sm font-medium text-white transition-all hover:border-zinc-600 hover:bg-zinc-800"
+            >
+              Read Biography
+            </a>
+            <a
+              href="/academy"
+              className="group relative inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-medium text-black transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]"
+            >
+              Explore Academy
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Right: Image */}
+        <motion.div
+          custom={1}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUpVariants}
+          className="relative flex items-center justify-center lg:justify-end"
+        >
+          <div className="relative aspect-[3/4] w-full max-w-lg overflow-hidden rounded-3xl">
+            <Image
+              src="/portrait.jpg"
+              alt="Juri Nardelli"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+            {/* Elegant vignette */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+            <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
