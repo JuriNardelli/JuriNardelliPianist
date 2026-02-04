@@ -95,7 +95,7 @@ export function Hero() {
             variants={fadeUpVariants}
             className="relative mt-8 flex items-center justify-center lg:hidden"
           >
-            <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden rounded-3xl">
+            <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden">
               <Image
                 src="/portrait.jpg"
                 alt="Juri Nardelli"
@@ -103,8 +103,9 @@ export function Hero() {
                 className="object-cover object-top"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
-              <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
+              {/* Blend edges into background */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50" />
             </div>
           </motion.div>
 
@@ -179,7 +180,7 @@ export function Hero() {
           variants={fadeUpVariants}
           className="relative hidden items-center justify-center lg:flex lg:justify-end order-1 lg:order-2"
         >
-          <div className="relative aspect-[3/4] w-full max-w-lg overflow-hidden rounded-3xl">
+          <div className="relative aspect-[3/4] w-full max-w-lg overflow-hidden">
             <Image
               src="/portrait.jpg"
               alt="Juri Nardelli"
@@ -187,9 +188,10 @@ export function Hero() {
               className="object-cover object-top"
               priority
             />
-            {/* Elegant vignette */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
-            <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
+            {/* Blend edges into background */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent" />
           </div>
         </motion.div>
       </div>
