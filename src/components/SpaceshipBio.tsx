@@ -26,7 +26,7 @@ const chapters = [
     id: 3,
     title: "The Conservatory Years",
     year: "2010 – 2016",
-    text: "Studying at the G. Verdi Conservatory in Milan with E. Fedrigotti and E. Borri, and at the ISSM Superior Musical Institute in Siena with H. Moreno. Award winner at competitions including Lamporecchio, S. Vincenzo, Città di Firenze, and Città di Grosseto. Won the Torricelli Scholarship, and on 21 June 2016 made my orchestral debut as soloist, performing Rachmaninov's Piano Concerto No. 2 at Teatro dei Rinnovati in Siena.",
+    text: "My path led me to Italy's finest institutions — the G. Verdi Conservatory in Milan, studying with E. Fedrigotti and E. Borri, and the ISSM in Siena under H. Moreno. These years were marked by growth and recognition: victories at Lamporecchio, S. Vincenzo, Città di Firenze, and Città di Grosseto, and the honour of the Torricelli Scholarship. It all culminated on 21 June 2016, when I stepped onto the stage of Teatro dei Rinnovati in Siena to perform Rachmaninov's Second Piano Concerto — my first time as soloist with orchestra.",
     image: "/bio/debut.jpg",
     imagePosition: "object-[65%_center]",
   },
