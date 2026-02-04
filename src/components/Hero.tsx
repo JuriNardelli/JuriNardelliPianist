@@ -69,28 +69,30 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            className="relative"
+            className="relative overflow-visible"
           >
             {/* Glow layer */}
-            <div className="absolute inset-0 text-5xl font-bold leading-[1.1] tracking-tight text-white/30 blur-2xl sm:text-6xl lg:text-7xl">
+            <div className="absolute inset-0 text-4xl font-bold leading-[1.1] tracking-tight text-white/20 blur-2xl sm:text-5xl lg:text-6xl">
               Juri Nardelli
             </div>
 
             {/* Main title */}
-            <h1 className="relative text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="relative text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
               <span className="bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent drop-shadow-[0_4px_12px_rgba(255,255,255,0.25)]">
                 Juri Nardelli
               </span>
             </h1>
 
-            {/* Reflection */}
-            <div
-              className="mt-1 text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl"
-              style={{ transform: 'scaleY(-1)' }}
-            >
-              <span className="bg-gradient-to-b from-transparent via-zinc-800/30 to-zinc-600/10 bg-clip-text text-transparent">
-                Juri Nardelli
-              </span>
+            {/* Reflection - positioned and clipped */}
+            <div className="relative h-8 overflow-hidden sm:h-10 lg:h-12">
+              <div
+                className="absolute top-0 text-4xl font-bold leading-[1.1] tracking-tight opacity-40 sm:text-5xl lg:text-6xl"
+                style={{ transform: 'scaleY(-0.4)' }}
+              >
+                <span className="bg-gradient-to-b from-zinc-500 to-transparent bg-clip-text text-transparent">
+                  Juri Nardelli
+                </span>
+              </div>
             </div>
           </motion.div>
 
