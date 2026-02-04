@@ -250,15 +250,38 @@ export function Hero() {
         />
       </div>
 
-      {/* Cosmic dust / Milky Way band */}
+      {/* Milky Way band - prominent */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute top-0 left-1/4 w-[200%] h-[40%] -rotate-12 origin-center"
-          animate={{ x: [-50, 50, -50] }}
-          transition={{ duration: 60, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div className="h-full w-full bg-gradient-to-b from-transparent via-white/[0.02] to-transparent blur-2xl" />
-        </motion.div>
+        {/* Main milky way band */}
+        <div className="absolute top-[10%] -left-[20%] w-[150%] h-[60%] -rotate-[25deg] origin-center">
+          {/* Core glow */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/[0.08] to-transparent blur-3xl" />
+          {/* Bright center */}
+          <div className="absolute top-[35%] left-[30%] w-[40%] h-[30%] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent blur-2xl" />
+          {/* Star dust particles */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/[0.04] to-transparent blur-2xl translate-y-4" />
+        </div>
+        {/* Secondary dust lane */}
+        <div className="absolute top-[5%] -left-[10%] w-[120%] h-[50%] -rotate-[20deg]">
+          <div className="h-full w-full bg-gradient-to-b from-transparent via-blue-400/[0.05] to-transparent blur-3xl" />
+        </div>
+        {/* Bright star concentration in milky way */}
+        <div className="absolute top-[25%] left-[20%] w-[60%] h-[20%] -rotate-[25deg]">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={`mw-star-${i}`}
+              className="absolute rounded-full bg-white"
+              style={{
+                width: Math.random() * 1.5 + 0.5,
+                height: Math.random() * 1.5 + 0.5,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{ opacity: [0.2, 0.8, 0.2] }}
+              transition={{ duration: 2 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 2 }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Subtle grid pattern overlay */}

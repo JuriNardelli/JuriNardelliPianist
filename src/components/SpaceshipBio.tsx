@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import { Rocket, ChevronDown } from "lucide-react";
 
 const chapters = [
@@ -70,13 +70,19 @@ function generateStars(count: number) {
 export function SpaceshipBio() {
   const [activeChapter, setActiveChapter] = useState(0);
   const [isFlying, setIsFlying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const stars = useMemo(() => generateStars(100), []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  // Detect mobile for performance optimization
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Fewer stars on mobile for better performance
+  const stars = useMemo(() => generateStars(isMobile ? 30 : 80), [isMobile]);
 
   const navigateToChapter = (index: number) => {
     if (isFlying || index === activeChapter) return;
@@ -125,18 +131,10 @@ export function SpaceshipBio() {
         ))}
       </div>
 
-      {/* Nebula */}
+      {/* Nebula - static on mobile for performance */}
       <div className="fixed inset-0 pointer-events-none">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 200, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-purple-900/20 via-transparent to-transparent blur-3xl"
-        />
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 250, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-l from-cyan-900/15 via-transparent to-transparent blur-3xl"
-        />
+        <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-gradient-to-r from-purple-900/20 via-transparent to-transparent blur-3xl" />
+        <div className="absolute -bottom-1/4 -right-1/4 w-[400px] h-[400px] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-l from-cyan-900/15 via-transparent to-transparent blur-3xl" />
       </div>
 
       {/* Main content */}
