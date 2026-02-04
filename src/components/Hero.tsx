@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Instagram, Youtube } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -18,8 +18,22 @@ const fadeUpVariants = {
   }),
 };
 
+// Generate stars for the galaxy
+function generateStars(count: number) {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 2 + 0.5,
+    duration: Math.random() * 3 + 2,
+    delay: Math.random() * 2,
+  }));
+}
+
 export function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+  const stars = useMemo(() => generateStars(150), []);
+  const shootingStars = useMemo(() => generateStars(5), []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -34,75 +48,121 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-black">
-      {/* Animated gradient orbs */}
+      {/* Deep space background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a] via-black to-black" />
+
+      {/* Starfield */}
+      <div className="pointer-events-none absolute inset-0">
+        {stars.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute rounded-full bg-white"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: star.size,
+              height: star.size,
+            }}
+            animate={{
+              opacity: [0.2, 1, 0.2],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: star.duration,
+              repeat: Infinity,
+              delay: star.delay,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Shooting stars */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {shootingStars.map((star, i) => (
+          <motion.div
+            key={`shooting-${star.id}`}
+            className="absolute h-px bg-gradient-to-r from-transparent via-white to-cyan-400"
+            style={{
+              width: "100px",
+              top: `${10 + i * 15}%`,
+              left: "-100px",
+            }}
+            animate={{
+              x: ["0vw", "120vw"],
+              opacity: [0, 1, 1, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: i * 4 + star.delay * 2,
+              repeatDelay: 8,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Nebula clouds */}
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-3xl"
+          animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-1/4 -left-1/4 h-[600px] w-[600px] rounded-full bg-gradient-to-r from-purple-900/30 via-blue-900/20 to-transparent blur-3xl"
         />
         <motion.div
-          animate={{
-            x: [0, -100, 0],
-            y: [0, 100, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 blur-3xl"
+          animate={{ x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.15, 1] }}
+          transition={{ duration: 35, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -bottom-1/4 -right-1/4 h-[700px] w-[700px] rounded-full bg-gradient-to-l from-amber-900/20 via-orange-900/15 to-transparent blur-3xl"
         />
         <motion.div
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -80, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/2 left-1/3 h-72 w-72 rounded-full bg-gradient-to-r from-cyan-500/10 to-teal-500/10 blur-3xl"
+          animate={{ x: [0, 30, 0], y: [0, -50, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/3 left-1/2 h-96 w-96 rounded-full bg-gradient-to-r from-cyan-900/20 via-teal-900/15 to-transparent blur-3xl"
         />
       </div>
 
-      {/* Mouse-following glow */}
-      <div
-        className="pointer-events-none absolute h-96 w-96 rounded-full bg-gradient-to-r from-white/5 to-transparent blur-3xl transition-all duration-300 ease-out"
-        style={{
+      {/* Mouse-following galaxy glow */}
+      <motion.div
+        className="pointer-events-none absolute h-[500px] w-[500px] rounded-full"
+        animate={{
           left: `${mousePosition.x}%`,
           top: `${mousePosition.y}%`,
-          transform: "translate(-50%, -50%)",
         }}
-      />
+        transition={{ type: "spring", damping: 30, stiffness: 200 }}
+        style={{ transform: "translate(-50%, -50%)" }}
+      >
+        <div className="h-full w-full rounded-full bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-amber-500/10 blur-3xl" />
+      </motion.div>
+
+      {/* Distant galaxies */}
+      <div className="pointer-events-none absolute inset-0">
+        <motion.div
+          className="absolute top-[20%] right-[15%] h-1 w-1 rounded-full bg-purple-400/60"
+          animate={{ scale: [1, 1.5, 1], opacity: [0.4, 0.8, 0.4] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute top-[60%] left-[10%] h-1.5 w-1.5 rounded-full bg-cyan-400/50"
+          animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+        />
+        <motion.div
+          className="absolute bottom-[25%] right-[25%] h-1 w-1 rounded-full bg-amber-400/40"
+          animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 6, repeat: Infinity, delay: 2 }}
+        />
+      </div>
 
       {/* Grid pattern overlay */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.02]"
+        className="pointer-events-none absolute inset-0 opacity-[0.015]"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: "100px 100px",
+          backgroundImage: `linear-gradient(rgba(100,200,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(100,200,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: "120px 120px",
         }}
       />
 
-      {/* Noise texture */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Radial gradient */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900/0 via-black/50 to-black" />
+      {/* Vignette */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_black_70%)]" />
 
       {/* Social icons - top left */}
       <motion.div
