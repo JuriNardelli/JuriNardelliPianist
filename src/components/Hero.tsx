@@ -64,17 +64,35 @@ export function Hero() {
       <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-8 px-8 py-24 lg:grid-cols-2 lg:gap-16 lg:px-16">
         {/* Left: Content */}
         <div className="relative z-10 flex flex-col order-2 lg:order-1">
-          <motion.h1
+          <motion.div
             custom={0}
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            className="text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl"
+            className="relative"
           >
-            <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+            {/* Glow layer */}
+            <div className="absolute inset-0 text-5xl font-bold leading-[1.1] tracking-tight text-white/30 blur-2xl sm:text-6xl lg:text-7xl">
               Juri Nardelli
-            </span>
-          </motion.h1>
+            </div>
+
+            {/* Main title */}
+            <h1 className="relative text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
+              <span className="bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent drop-shadow-[0_4px_12px_rgba(255,255,255,0.25)]">
+                Juri Nardelli
+              </span>
+            </h1>
+
+            {/* Reflection */}
+            <div
+              className="mt-1 text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl"
+              style={{ transform: 'scaleY(-1)' }}
+            >
+              <span className="bg-gradient-to-b from-transparent via-zinc-800/30 to-zinc-600/10 bg-clip-text text-transparent">
+                Juri Nardelli
+              </span>
+            </div>
+          </motion.div>
 
           <motion.p
             custom={1}
