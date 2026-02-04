@@ -40,7 +40,7 @@ const chapters = [
     id: 5,
     title: "Opera & The Stage",
     year: "2002 – Present",
-    text: "Award winner at competitions including S.Vincenzo, Lamporecchio, Città di Firenze, Vocalis, Città di Grosseto, and the Maastricht Music Award. I've performed as soloist, chamber musician, and opera répétiteur at venues like Amiata Piano Festival, Muziekgebouw Eindhoven, Theater Vrijthof Maastricht, Auditorio Tenerife, Conservatorio Verdi Milan, Festival Duino, Orbetello Piano Festival, Piano City Milan, and many others across Italy, France, Belgium, Germany, Spain, and England — collaborating with artists such as conductor Christopher Franklin and mezzo-soprano Siena Licht Miller.",
+    text: "Award winner at competitions including S.Vincenzo, Lamporecchio, Città di Firenze, Vocalis, Città di Grosseto, and the Maastricht Music Award. I've performed as soloist, chamber musician, and opera répétiteur at venues like Amiata Piano Festival, Muziekgebouw Eindhoven, Theater Vrijthof Maastricht, Concertzaal Tilburg, Auditorio Tenerife, Conservatorio Verdi Milan, Salone dei Cinquecento Florence, Teatro dei Rozzi Siena, Teatro dei Rinnovati Siena, Sala Rosa Siena, Festival Duino, Orbetello Piano Festival, Piano City Milan, and many others across Italy, France, Belgium, Germany, Spain, and England — collaborating with artists such as conductor Christopher Franklin and mezzo-soprano Siena Licht Miller.",
     image: "/bio/chapter-4.jpg",
     imagePosition: "object-[center_30%]",
   },
