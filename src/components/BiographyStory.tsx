@@ -32,7 +32,7 @@ const chapters = [
     id: 4,
     title: "Master of Music",
     year: "2018 – 2020",
-    text: "At the Conservatorium van Maastricht, I completed my MMA in Piano Performance under the mentorship of Igor Roma, winner of the prestigious Liszt Competition. This period marked a transformative deepening of my musical identity.",
+    text: "At the Conservatorium van Maastricht, I completed my MMus in Piano Performance under the mentorship of Igor Roma, winner of the prestigious Liszt Competition. This period marked a transformative deepening of my musical identity.",
     image: "/bio/chapter-5.jpg",
     imagePosition: "object-top",
   },
