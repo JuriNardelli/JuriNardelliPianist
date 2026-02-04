@@ -27,7 +27,7 @@ export function Navbar() {
             href="/"
             className="text-lg font-semibold tracking-tight text-white transition-opacity hover:opacity-80"
           >
-            Juri Nardelli
+            Juri Nardelli <span className="font-normal text-zinc-500">— Pianist</span>
           </Link>
 
           <ul className="hidden items-center gap-8 md:flex">

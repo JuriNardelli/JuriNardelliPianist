@@ -84,7 +84,7 @@ export function Hero() {
             variants={fadeUpVariants}
             className="mt-4 text-base font-light tracking-widest text-zinc-500 sm:text-lg"
           >
-            Concert Pianist · Educator · MMA Piano Performance
+            Concert Pianist · Educator · Master in Piano Performance MMus
           </motion.p>
 
           {/* Mobile Image - shown only on mobile, between text and CTAs */}
@@ -95,17 +95,18 @@ export function Hero() {
             variants={fadeUpVariants}
             className="relative mt-8 flex items-center justify-center lg:hidden"
           >
-            <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden">
-              <Image
-                src="/portrait.jpg"
-                alt="Juri Nardelli"
-                fill
-                className="object-cover object-top"
-                priority
-              />
-              {/* Blend edges into background */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50" />
+            <div className="relative">
+              <div className="relative h-56 w-56 overflow-hidden rounded-full border border-zinc-800 sm:h-64 sm:w-64">
+                <Image
+                  src="/portrait.jpg"
+                  alt="Juri Nardelli"
+                  fill
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
+              {/* Decorative ring */}
+              <div className="absolute -inset-3 rounded-full border border-zinc-800/50" />
             </div>
           </motion.div>
 
@@ -180,18 +181,18 @@ export function Hero() {
           variants={fadeUpVariants}
           className="relative hidden items-center justify-center lg:flex lg:justify-end order-1 lg:order-2"
         >
-          <div className="relative aspect-[3/4] w-full max-w-lg overflow-hidden">
-            <Image
-              src="/portrait.jpg"
-              alt="Juri Nardelli"
-              fill
-              className="object-cover object-top"
-              priority
-            />
-            {/* Blend edges into background */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/60" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent" />
+          <div className="relative">
+            <div className="relative h-80 w-80 overflow-hidden rounded-full border border-zinc-800 xl:h-96 xl:w-96">
+              <Image
+                src="/portrait.jpg"
+                alt="Juri Nardelli"
+                fill
+                className="object-cover object-top"
+                priority
+              />
+            </div>
+            {/* Decorative ring */}
+            <div className="absolute -inset-4 rounded-full border border-zinc-800/50" />
           </div>
         </motion.div>
       </div>

@@ -192,7 +192,7 @@ export function AcademyFunnel() {
                 Juri Nardelli
               </h2>
               <p className="mt-2 text-lg text-zinc-500">
-                Concert Pianist · Educator · MMA Piano Performance
+                Concert Pianist · Educator · Master in Piano Performance MMus
               </p>
 
               <div className="mt-6 space-y-4 text-zinc-400">
