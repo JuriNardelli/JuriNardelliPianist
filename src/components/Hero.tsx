@@ -101,23 +101,99 @@ export function Hero() {
         ))}
       </div>
 
-      {/* Nebula clouds */}
+      {/* Nebula clouds - enhanced */}
       <div className="pointer-events-none absolute inset-0">
+        {/* Large purple nebula */}
         <motion.div
           animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
           transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-1/4 -left-1/4 h-[600px] w-[600px] rounded-full bg-gradient-to-r from-purple-900/30 via-blue-900/20 to-transparent blur-3xl"
+          className="absolute -top-1/4 -left-1/4 h-[700px] w-[700px] rounded-full bg-gradient-to-br from-purple-800/40 via-violet-900/30 to-transparent blur-3xl"
         />
+        {/* Pink/magenta nebula accent */}
+        <motion.div
+          animate={{ x: [0, -30, 0], y: [0, 20, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[5%] h-[400px] w-[400px] rounded-full bg-gradient-to-r from-pink-900/25 via-fuchsia-900/20 to-transparent blur-3xl"
+        />
+        {/* Orange/amber nebula */}
         <motion.div
           animate={{ x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.15, 1] }}
           transition={{ duration: 35, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-1/4 -right-1/4 h-[700px] w-[700px] rounded-full bg-gradient-to-l from-amber-900/20 via-orange-900/15 to-transparent blur-3xl"
+          className="absolute -bottom-1/4 -right-1/4 h-[800px] w-[800px] rounded-full bg-gradient-to-l from-amber-800/25 via-orange-900/20 to-transparent blur-3xl"
         />
+        {/* Cyan/teal nebula */}
         <motion.div
           animate={{ x: [0, 30, 0], y: [0, -50, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 left-1/2 h-96 w-96 rounded-full bg-gradient-to-r from-cyan-900/20 via-teal-900/15 to-transparent blur-3xl"
+          className="absolute top-1/3 left-1/2 h-[500px] w-[500px] rounded-full bg-gradient-to-r from-cyan-800/25 via-teal-900/20 to-transparent blur-3xl"
         />
+        {/* Blue nebula streak */}
+        <motion.div
+          animate={{ x: [0, 20, 0], y: [0, -30, 0], rotate: [0, 5, 0] }}
+          transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[20%] right-[10%] h-[300px] w-[600px] rounded-full bg-gradient-to-l from-blue-800/20 via-indigo-900/15 to-transparent blur-3xl rotate-45"
+        />
+      </div>
+
+      {/* Spiral Galaxy effect */}
+      <div className="pointer-events-none absolute inset-0">
+        <motion.div
+          className="absolute top-[15%] right-[20%] w-20 h-20"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400/30 via-transparent to-transparent blur-sm" />
+          <div className="absolute inset-2 rounded-full bg-gradient-to-r from-white/40 via-transparent to-transparent blur-[2px]" />
+          <div className="absolute inset-[35%] rounded-full bg-white/60 blur-[1px]" />
+        </motion.div>
+        {/* Second smaller galaxy */}
+        <motion.div
+          className="absolute bottom-[30%] left-[8%] w-12 h-12"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/25 via-transparent to-transparent blur-sm" />
+          <div className="absolute inset-2 rounded-full bg-gradient-to-r from-white/30 via-transparent to-transparent blur-[1px]" />
+          <div className="absolute inset-[35%] rounded-full bg-white/50 blur-[1px]" />
+        </motion.div>
+      </div>
+
+      {/* Star clusters */}
+      <div className="pointer-events-none absolute inset-0">
+        {/* Bright star cluster 1 */}
+        <div className="absolute top-[25%] left-[15%]">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={`cluster1-${i}`}
+              className="absolute rounded-full bg-white"
+              style={{
+                width: Math.random() * 2 + 1,
+                height: Math.random() * 2 + 1,
+                left: Math.random() * 30 - 15,
+                top: Math.random() * 30 - 15,
+              }}
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 2 + Math.random() * 2, repeat: Infinity, delay: Math.random() }}
+            />
+          ))}
+        </div>
+        {/* Bright star cluster 2 */}
+        <div className="absolute bottom-[20%] right-[12%]">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={`cluster2-${i}`}
+              className="absolute rounded-full bg-cyan-200"
+              style={{
+                width: Math.random() * 2 + 1,
+                height: Math.random() * 2 + 1,
+                left: Math.random() * 25 - 12,
+                top: Math.random() * 25 - 12,
+              }}
+              animate={{ opacity: [0.3, 0.9, 0.3] }}
+              transition={{ duration: 2.5 + Math.random() * 2, repeat: Infinity, delay: Math.random() }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Mouse-following galaxy glow */}
@@ -133,36 +209,69 @@ export function Hero() {
         <div className="h-full w-full rounded-full bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-amber-500/10 blur-3xl" />
       </motion.div>
 
-      {/* Distant galaxies */}
+      {/* Distant galaxies and bright stars */}
       <div className="pointer-events-none absolute inset-0">
+        {/* Bright pulsing stars */}
         <motion.div
-          className="absolute top-[20%] right-[15%] h-1 w-1 rounded-full bg-purple-400/60"
-          animate={{ scale: [1, 1.5, 1], opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute top-[12%] right-[30%] h-1.5 w-1.5 rounded-full bg-white"
+          animate={{ scale: [1, 2, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 3, repeat: Infinity }}
         />
         <motion.div
-          className="absolute top-[60%] left-[10%] h-1.5 w-1.5 rounded-full bg-cyan-400/50"
-          animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.7, 0.3] }}
-          transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+          className="absolute top-[45%] left-[5%] h-2 w-2 rounded-full bg-cyan-300"
+          animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0.9, 0.4] }}
+          transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
         />
         <motion.div
-          className="absolute bottom-[25%] right-[25%] h-1 w-1 rounded-full bg-amber-400/40"
-          animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 6, repeat: Infinity, delay: 2 }}
+          className="absolute bottom-[35%] right-[8%] h-1.5 w-1.5 rounded-full bg-amber-300"
+          animate={{ scale: [1, 1.6, 1], opacity: [0.4, 0.8, 0.4] }}
+          transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
+        />
+        <motion.div
+          className="absolute top-[70%] left-[25%] h-1 w-1 rounded-full bg-purple-300"
+          animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: 5, repeat: Infinity, delay: 1.5 }}
+        />
+        <motion.div
+          className="absolute top-[8%] left-[40%] h-1 w-1 rounded-full bg-pink-300"
+          animate={{ scale: [1, 2, 1], opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 4.5, repeat: Infinity, delay: 2 }}
+        />
+        {/* Distant galaxy blurs */}
+        <motion.div
+          className="absolute top-[55%] right-[18%] h-3 w-6 rounded-full bg-gradient-to-r from-purple-400/30 to-blue-400/20 blur-[2px] rotate-45"
+          animate={{ opacity: [0.2, 0.5, 0.2] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-[15%] left-[35%] h-2 w-4 rounded-full bg-gradient-to-r from-amber-400/25 to-orange-400/15 blur-[2px] -rotate-30"
+          animate={{ opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 7, repeat: Infinity, delay: 2 }}
         />
       </div>
 
-      {/* Grid pattern overlay */}
+      {/* Cosmic dust / Milky Way band */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute top-0 left-1/4 w-[200%] h-[40%] -rotate-12 origin-center"
+          animate={{ x: [-50, 50, -50] }}
+          transition={{ duration: 60, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="h-full w-full bg-gradient-to-b from-transparent via-white/[0.02] to-transparent blur-2xl" />
+        </motion.div>
+      </div>
+
+      {/* Subtle grid pattern overlay */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.015]"
+        className="pointer-events-none absolute inset-0 opacity-[0.01]"
         style={{
           backgroundImage: `linear-gradient(rgba(100,200,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(100,200,255,0.1) 1px, transparent 1px)`,
           backgroundSize: "120px 120px",
         }}
       />
 
-      {/* Vignette */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_black_70%)]" />
+      {/* Vignette - softer */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_black_80%)]" />
 
       {/* Social icons - top left */}
       <motion.div

@@ -140,12 +140,12 @@ export function SpaceshipBio() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-32">
+      <div className="relative z-10 min-h-screen flex flex-col items-center px-6 py-32">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <p className="text-sm font-light tracking-[0.3em] uppercase text-cyan-400/80">
             Journey Through Time
@@ -156,66 +156,72 @@ export function SpaceshipBio() {
           <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
         </motion.div>
 
-        {/* Spaceship navigation */}
-        <div className="relative w-full max-w-5xl">
-          {/* Planet/chapter indicators */}
-          <div className="flex justify-between items-center mb-16 px-4">
-            {chapters.map((chapter, index) => (
-              <motion.button
-                key={chapter.id}
-                onClick={() => navigateToChapter(index)}
-                className={`relative group ${index === activeChapter ? 'scale-110' : ''}`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {/* Planet */}
-                <div
-                  className={`w-4 h-4 sm:w-6 sm:h-6 rounded-full transition-all duration-500 ${
-                    index === activeChapter
-                      ? 'bg-gradient-to-r from-cyan-400 to-purple-500 shadow-[0_0_20px_rgba(34,211,238,0.5)]'
-                      : index < activeChapter
-                      ? 'bg-zinc-600'
-                      : 'bg-zinc-800 border border-zinc-700'
-                  }`}
-                />
-                {/* Planet ring for active */}
-                {index === activeChapter && (
-                  <motion.div
-                    className="absolute -inset-2 rounded-full border border-cyan-400/30"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                  />
-                )}
-                {/* Label on hover */}
-                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  <span className="text-xs text-zinc-400">{chapter.year}</span>
-                </div>
-              </motion.button>
-            ))}
-
+        {/* Spaceship navigation - isolated container */}
+        <div className="w-full max-w-4xl mb-16 px-8">
+          <div className="relative h-16 flex items-center">
             {/* Connection line */}
-            <div className="absolute top-1/2 left-0 right-0 h-px bg-zinc-800 -z-10" />
+            <div className="absolute top-1/2 left-4 right-4 h-px bg-zinc-800" />
 
             {/* Progress line */}
             <motion.div
-              className="absolute top-1/2 left-0 h-px bg-gradient-to-r from-cyan-500 to-purple-500 -z-10"
+              className="absolute top-1/2 left-4 h-px bg-gradient-to-r from-cyan-500 to-purple-500"
               initial={{ width: "0%" }}
-              animate={{ width: `${(activeChapter / (chapters.length - 1)) * 100}%` }}
+              animate={{ width: `calc(${(activeChapter / (chapters.length - 1)) * 100}% * (100% - 32px) / 100%)` }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
+              style={{ width: `${(activeChapter / (chapters.length - 1)) * (100 - 3)}%` }}
             />
+
+            {/* Planet/chapter indicators */}
+            <div className="relative w-full flex justify-between items-center px-4">
+              {chapters.map((chapter, index) => (
+                <motion.button
+                  key={chapter.id}
+                  onClick={() => navigateToChapter(index)}
+                  className={`relative group z-10 ${index === activeChapter ? 'scale-110' : ''}`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {/* Planet */}
+                  <div
+                    className={`w-4 h-4 sm:w-6 sm:h-6 rounded-full transition-all duration-500 ${
+                      index === activeChapter
+                        ? 'bg-gradient-to-r from-cyan-400 to-purple-500 shadow-[0_0_20px_rgba(34,211,238,0.5)]'
+                        : index < activeChapter
+                        ? 'bg-zinc-600'
+                        : 'bg-zinc-800 border border-zinc-700'
+                    }`}
+                  />
+                  {/* Planet ring for active */}
+                  {index === activeChapter && (
+                    <motion.div
+                      className="absolute -inset-2 rounded-full border border-cyan-400/30"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                    />
+                  )}
+                  {/* Label on hover */}
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    <span className="text-xs text-zinc-400">{chapter.year}</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
 
             {/* Spaceship */}
             <motion.div
-              className="absolute top-1/2 -translate-y-1/2 z-20"
+              className="absolute top-1/2 -translate-y-1/2 z-20 pointer-events-none"
               animate={{
-                left: `${(activeChapter / (chapters.length - 1)) * 100}%`,
+                left: `calc(${(activeChapter / (chapters.length - 1)) * 100}% * (100% - 32px) / 100% + 16px)`,
                 rotate: isFlying ? [0, -10, 10, 0] : 0,
               }}
               transition={{
                 left: { duration: 0.8, ease: "easeInOut" },
                 rotate: { duration: 0.4, repeat: isFlying ? 2 : 0 },
               }}
-              style={{ marginLeft: "-12px" }}
+              style={{
+                left: `calc(${(activeChapter / (chapters.length - 1)) * (100 - 3)}% + 16px)`,
+                marginLeft: "-12px"
+              }}
             >
               <motion.div
                 animate={isFlying ? { scale: [1, 1.2, 1] } : {}}
@@ -233,7 +239,10 @@ export function SpaceshipBio() {
               )}
             </motion.div>
           </div>
+        </div>
 
+        {/* Chapter content - separate container */}
+        <div className="w-full max-w-5xl">
           {/* Chapter content */}
           <AnimatePresence mode="wait">
             <motion.div
@@ -320,6 +329,7 @@ export function SpaceshipBio() {
               </motion.div>
             </motion.button>
           )}
+        </div>
         </div>
 
         {/* Closing quote */}
