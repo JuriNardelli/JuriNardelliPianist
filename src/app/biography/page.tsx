@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/Navbar";
 import { BiographyStory } from "@/components/BiographyStory";
 import { PhotoGallery } from "@/components/PhotoGallery";
+import { Footer } from "@/components/Footer";
+import { BiographyCTA } from "@/components/BiographyCTA";
 
 export const metadata = {
   title: "Biography | Juri Nardelli - Concert Pianist",
@@ -15,7 +17,9 @@ export default function BiographyPage() {
       <main className="bg-black">
         <BiographyStory />
         <PhotoGallery />
+        <BiographyCTA />
       </main>
+      <Footer />
     </>
   );
 }

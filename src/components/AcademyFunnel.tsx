@@ -360,7 +360,7 @@ export function AcademyFunnel() {
 
             {/* Caption */}
             <p className="mt-6 text-center text-zinc-500">
-              Adult student performing Chopin Étude Op. 10 No. 3 in E major —
+              Leon performing Chopin Étude Op. 10 No. 3 in E major —
               <span className="text-amber-500/80"> "Tristesse"</span>
             </p>
           </motion.div>
@@ -374,14 +374,77 @@ export function AcademyFunnel() {
             className="mt-16 text-center"
           >
             <p className="text-xl font-light italic leading-relaxed text-zinc-300">
-              "I started piano at 35, thinking Chopin études were impossible for adults.
-              Juri showed me that with structured practice and expert guidance,
-              the 'impossible' becomes achievable."
+              "Juri showed me that with structured practice and expert guidance,
+              pieces I thought were out of reach became achievable.
+              His approach transformed my understanding of the piano."
             </p>
             <footer className="mt-6">
-              <p className="font-semibold text-white">— Academy Student</p>
+              <p className="font-semibold text-white">— Leon, Academy Student</p>
             </footer>
           </motion.blockquote>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="border-t border-zinc-900 py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+            className="text-center"
+          >
+            <p className="text-sm font-light tracking-[0.3em] uppercase text-amber-500/80">
+              Questions
+            </p>
+            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
+              Frequently Asked
+            </h2>
+            <div className="mx-auto mt-4 h-px w-16 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.1 } },
+            }}
+            className="mt-12 space-y-6"
+          >
+            {[
+              {
+                q: "How do lessons work?",
+                a: "Lessons are conducted online via Zoom, making it easy to learn from anywhere in the world. Each session is 60 minutes of focused, personalized instruction.",
+              },
+              {
+                q: "What level of students do you accept?",
+                a: "I work with students of all levels — from beginners taking their first steps to advanced pianists preparing for competitions or auditions. The key requirement is dedication.",
+              },
+              {
+                q: "What if I need to reschedule a lesson?",
+                a: "Life happens. With 24 hours notice, you can reschedule your lesson at no charge. I understand that flexibility is important.",
+              },
+              {
+                q: "How often are lessons?",
+                a: "The mentorship includes weekly 60-minute private lessons. Consistency is key to progress, and weekly sessions ensure steady improvement.",
+              },
+              {
+                q: "What platform do you use for video feedback?",
+                a: "You can send recordings via WhatsApp, email, or any platform you prefer. I'll respond with detailed video or written feedback within 48 hours.",
+              },
+            ].map((faq, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn}
+                className="rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-6"
+              >
+                <h3 className="text-lg font-semibold text-white">{faq.q}</h3>
+                <p className="mt-3 text-zinc-400">{faq.a}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -414,14 +477,6 @@ export function AcademyFunnel() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-900 py-8">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <p className="text-sm text-zinc-600">
-            © {new Date().getFullYear()} Juri Nardelli. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

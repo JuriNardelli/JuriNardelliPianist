@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { AcademyFunnel } from "@/components/AcademyFunnel";
+import { Footer } from "@/components/Footer";
 
 export const metadata = {
   title: "Piano Lessons & Mentorship | Juri Nardelli Academy",
@@ -14,6 +15,7 @@ export default function AcademyPage() {
       <main className="bg-black">
         <AcademyFunnel />
       </main>
+      <Footer />
     </>
   );
 }
