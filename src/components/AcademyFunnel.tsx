@@ -248,7 +248,6 @@ export function AcademyFunnel() {
                     preload="metadata"
                     playsInline
                   >
-                    <source src="/leon-chopin.mov" type="video/quicktime" />
                     <source src="/leon-chopin.mp4" type="video/mp4" />
                   </video>
                 </div>
