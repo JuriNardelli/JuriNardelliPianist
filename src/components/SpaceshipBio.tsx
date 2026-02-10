@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState, useRef, useMemo, useEffect } from "react";
-import { Rocket, ChevronDown, ArrowRight } from "lucide-react";
+import { Rocket, ChevronDown } from "lucide-react";
 
 const chapters = [
   {
@@ -161,7 +161,7 @@ export function SpaceshipBio() {
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
             The Story
           </h1>
-          <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-cyan-500 via-violet-500 to-fuchsia-500" />
+          <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-rose-500 via-cyan-500 to-fuchsia-500" />
         </motion.div>
 
         {/* Spaceship navigation - isolated container */}
@@ -172,18 +172,12 @@ export function SpaceshipBio() {
 
             {/* Progress line - rainbow gradient */}
             <motion.div
-              className="absolute top-1/2 left-4 h-px bg-gradient-to-r from-cyan-500 via-amber-500 via-emerald-500 via-violet-500 via-rose-500 to-fuchsia-500"
+              className="absolute top-1/2 left-4 h-px bg-gradient-to-r from-rose-500 via-amber-500 via-emerald-500 via-cyan-500 via-violet-500 to-fuchsia-500"
               initial={{ width: "0%" }}
               animate={{ width: `calc(${(activeChapter / (chapters.length - 1)) * 100}% * (100% - 32px) / 100%)` }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
               style={{ width: `${(activeChapter / (chapters.length - 1)) * (100 - 3)}%` }}
             />
-
-            {/* Navigation hint */}
-            <p className="text-xs text-zinc-600 text-center mb-2 md:mb-4">
-              <span className="md:hidden">Tap planets to jump</span>
-              <span className="hidden md:inline">Click any planet to jump to that chapter</span>
-            </p>
 
             {/* Planet/chapter indicators */}
             <div className="relative w-full flex justify-between items-center px-4">
@@ -200,7 +194,7 @@ export function SpaceshipBio() {
                   >
                     {/* Planet */}
                     <div
-                      className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full transition-all duration-500 ${
+                      className={`w-4 h-4 sm:w-6 sm:h-6 rounded-full transition-all duration-500 ${
                         index === activeChapter
                           ? `bg-gradient-to-r ${color.gradient}`
                           : index < activeChapter
@@ -209,17 +203,17 @@ export function SpaceshipBio() {
                       }`}
                       style={index <= activeChapter ? { boxShadow: `0 0 20px ${color.shadow}` } : {}}
                     />
-                    {/* Planet ring for active - pulse on mobile to show it's tappable */}
+                    {/* Planet ring for active */}
                     {index === activeChapter && (
                       <motion.div
-                        className={`absolute inset-0 rounded-full border-2 ${color.ring}`}
-                        animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.2, 0.5] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        className={`absolute inset-1 rounded-full border ${color.ring}`}
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                       />
                     )}
-                    {/* Label - always visible on mobile for current */}
-                    <div className={`absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap ${index === activeChapter ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}>
-                      <span className="text-[10px] text-zinc-500">{chapter.year}</span>
+                    {/* Label on hover */}
+                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      <span className="text-xs text-zinc-400">{chapter.year}</span>
                     </div>
                   </motion.button>
                 );
@@ -354,36 +348,24 @@ export function SpaceshipBio() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Next Chapter button - prominent, shows next chapter info */}
+          {/* Next button - shows next planet's color on hover */}
           {activeChapter < chapters.length - 1 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="mt-12 md:mt-16 text-center"
+            <motion.button
+              onClick={nextChapter}
+              className={`mt-16 mx-auto flex flex-col items-center gap-2 text-zinc-500 transition-colors`}
+              style={{ '--hover-color': planetColors[activeChapter + 1]?.shadow } as React.CSSProperties}
+              whileHover={{ scale: 1.05, color: planetColors[activeChapter + 1]?.shadow.replace('0.5', '1') }}
+              whileTap={{ scale: 0.95 }}
             >
-              <p className="text-sm text-zinc-600 mb-4 hidden md:block">Continue the journey</p>
-              <motion.button
-                onClick={nextChapter}
-                className={`group inline-flex items-center gap-4 rounded-full py-4 px-8 font-semibold text-black bg-gradient-to-r ${planetColors[activeChapter + 1]?.gradient}`}
-                style={{ boxShadow: `0 0 30px ${planetColors[activeChapter + 1]?.shadow}` }}
-                whileHover={{ scale: 1.05, boxShadow: `0 0 50px ${planetColors[activeChapter + 1]?.shadow}` }}
-                whileTap={{ scale: 0.98 }}
+              <span className="text-sm tracking-widest uppercase">Next Chapter</span>
+              <motion.div
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
               >
-                <span className="hidden md:inline">Next:</span>
-                <span>{chapters[activeChapter + 1]?.title}</span>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-5 h-5" />
-                </motion.div>
-              </motion.button>
-            </motion.div>
+                <ChevronDown className="w-6 h-6" />
+              </motion.div>
+            </motion.button>
           )}
-
-          {/* Mobile bottom padding for sticky button */}
-          <div className="h-20 md:hidden" />
         </div>
 
         {/* Closing quote */}
@@ -402,27 +384,6 @@ export function SpaceshipBio() {
           </motion.div>
         )}
       </div>
-
-      {/* Sticky mobile navigation - fixed at bottom */}
-      {activeChapter < chapters.length - 1 && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
-        >
-          <div className="bg-gradient-to-t from-black via-black/95 to-transparent pt-8 pb-6 px-6">
-            <motion.button
-              onClick={nextChapter}
-              className={`w-full flex items-center justify-center gap-3 rounded-full py-4 px-6 font-semibold text-black bg-gradient-to-r ${planetColors[activeChapter + 1]?.gradient}`}
-              style={{ boxShadow: `0 0 30px ${planetColors[activeChapter + 1]?.shadow}` }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span>Next: {chapters[activeChapter + 1]?.title}</span>
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-          </div>
-        </motion.div>
-      )}
     </section>
   );
 }

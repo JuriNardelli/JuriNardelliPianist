@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail } from "lucide-react";
+import { Mail, Sparkles } from "lucide-react";
 import { ContactForm } from "./ContactForm";
 
 const fadeIn = {
@@ -15,9 +15,21 @@ const fadeIn = {
 
 export function ContactContent() {
   return (
-    <div className="relative min-h-screen pt-32 pb-24">
-      {/* Simple gradient background */}
+    <div className="relative min-h-screen pt-32 pb-24 overflow-hidden">
+      {/* Elegant gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 via-black to-black" />
+
+      {/* Subtle floating orbs */}
+      <motion.div
+        className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-white/[0.02] blur-3xl"
+        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-zinc-500/[0.02] blur-3xl"
+        animate={{ x: [0, -20, 0], y: [0, 30, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="relative z-10 mx-auto max-w-2xl px-6">
         <motion.div

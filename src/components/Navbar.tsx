@@ -68,33 +68,51 @@ export function Navbar() {
         </nav>
       </motion.header>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu overlay - premium feel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-black/98 backdrop-blur-2xl md:hidden"
           >
-            <nav className="flex h-full flex-col items-center justify-center gap-8">
+            {/* Subtle background glow */}
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-white/[0.02] blur-3xl" />
+
+            <nav className="flex h-full flex-col items-center justify-center gap-6">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ delay: index * 0.08, type: "spring", stiffness: 200 }}
                 >
                   <Link
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-2xl font-medium text-white transition-colors hover:text-amber-500"
+                    className="group relative block text-3xl font-light tracking-wide text-white/80 transition-all duration-300 hover:text-white"
                   >
-                    {item.label}
+                    <span className="relative z-10">{item.label}</span>
+                    {/* Hover underline glow */}
+                    <motion.span
+                      className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:w-full transition-all duration-300"
+                    />
                   </Link>
                 </motion.div>
               ))}
+
+              {/* Social hint at bottom */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="absolute bottom-12 text-xs text-zinc-600 tracking-widest"
+              >
+                JURI NARDELLI
+              </motion.p>
             </nav>
           </motion.div>
         )}
