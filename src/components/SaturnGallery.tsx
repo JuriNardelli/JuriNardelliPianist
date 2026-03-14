@@ -22,7 +22,6 @@ const photos = [
 
 export function SaturnGallery() {
   const [selectedPhoto, setSelectedPhoto] = useState<typeof photos[0] | null>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const closeModal = useCallback(() => {
@@ -51,175 +50,60 @@ export function SaturnGallery() {
   return (
     <>
       <section className="relative bg-black py-24 overflow-hidden">
-        {/* Background stars */}
-        <div className="absolute inset-0 opacity-30">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute h-px w-px bg-white rounded-full"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                opacity: Math.random() * 0.8 + 0.2,
-              }}
-            />
-          ))}
+        {/* Subtle background glow */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-cyan-500/[0.03] blur-3xl" />
         </div>
 
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-20 text-center"
+            className="mb-16 text-center"
           >
             <p className="text-sm font-light tracking-[0.3em] uppercase text-cyan-400/70">
               Gallery
             </p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Moments in Orbit
+              Moments on Stage
             </h2>
             <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
           </motion.div>
 
-          {/* Saturn Container */}
-          <div className="relative mx-auto" style={{ maxWidth: "900px", aspectRatio: "1" }}>
-            {/* The Planet (Saturn) */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-48 sm:h-48 md:w-56 md:h-56"
-            >
-              {/* Planet glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-500/30 via-blue-600/20 to-purple-600/30 blur-xl scale-150" />
-
-              {/* Planet body */}
-              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 shadow-[0_0_60px_rgba(34,211,238,0.4)]">
-                {/* Surface details */}
-                <div className="absolute inset-2 rounded-full bg-gradient-to-br from-cyan-300/30 via-transparent to-transparent" />
-                <div className="absolute bottom-4 right-4 w-8 h-8 rounded-full bg-blue-700/40 blur-sm" />
-                <div className="absolute top-6 left-6 w-4 h-4 rounded-full bg-cyan-300/50 blur-sm" />
-              </div>
-            </motion.div>
-
-            {/* Photo Ring */}
-            <div className="relative w-full h-full">
-              {photos.map((photo, index) => {
-                const angle = (index / photos.length) * 360 - 90;
-                const radiusX = 42; // % from center
-                const radiusY = 18; // % from center (ellipse)
-                const x = 50 + radiusX * Math.cos((angle * Math.PI) / 180);
-                const y = 50 + radiusY * Math.sin((angle * Math.PI) / 180);
-                const isHovered = hoveredIndex === index;
-                const zIndex = isHovered ? 50 : Math.round(20 + 10 * Math.sin((angle * Math.PI) / 180));
-
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className="absolute cursor-pointer"
-                    style={{
-                      left: `${x}%`,
-                      top: `${y}%`,
-                      transform: "translate(-50%, -50%)",
-                      zIndex,
-                    }}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={() => setSelectedPhoto(photo)}
-                  >
-                    <motion.div
-                      animate={{
-                        scale: isHovered ? 1.8 : 1,
-                        boxShadow: isHovered
-                          ? "0 0 40px rgba(34,211,238,0.6)"
-                          : "0 0 15px rgba(34,211,238,0.3)",
-                      }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className="relative overflow-hidden rounded-full border-2 border-cyan-400/40 bg-zinc-900"
-                      style={{
-                        width: "clamp(50px, 8vw, 80px)",
-                        height: "clamp(50px, 8vw, 80px)",
-                      }}
-                    >
-                      <Image
-                        src={photo.src}
-                        alt={photo.alt}
-                        fill
-                        className="object-cover object-top"
-                        sizes="80px"
-                      />
-                      {/* Hover overlay with caption */}
-                      <AnimatePresence>
-                        {isHovered && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-black/70 via-transparent to-transparent p-1"
-                          >
-                            <span className="text-[8px] sm:text-[10px] font-medium text-white text-center truncate">
-                              {photo.caption}
-                            </span>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {/* Ring glow effect */}
-            <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-              style={{
-                width: "90%",
-                height: "40%",
-                background: "radial-gradient(ellipse, rgba(34,211,238,0.1) 0%, transparent 70%)",
-                transform: "translate(-50%, -50%)",
-              }}
-            />
-          </div>
-
-          {/* Mobile alternative - beautiful card grid */}
-          <div className="mt-8 md:hidden">
-            <p className="text-center text-xs text-zinc-500 mb-6">Tap any photo to view full size</p>
-            <div className="grid grid-cols-3 gap-2 px-2">
-              {photos.map((photo, index) => (
-                <motion.div
-                  key={`mobile-${index}`}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative aspect-square"
-                  onClick={() => setSelectedPhoto(photo)}
-                >
-                  <div className="relative w-full h-full rounded-xl overflow-hidden border border-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.15)]">
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      className="object-cover object-top"
-                      sizes="33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                    <div className="absolute bottom-1 left-1 right-1">
-                      <p className="text-[9px] text-white/80 truncate text-center">{photo.caption}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          {/* Photo grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+            {photos.map((photo, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: index * 0.04 }}
+                className="group relative aspect-[3/4] cursor-pointer overflow-hidden rounded-xl"
+                onClick={() => setSelectedPhoto(photo)}
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
+                />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Caption */}
+                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <p className="text-sm font-light tracking-wider text-white">
+                    {photo.caption}
+                  </p>
+                </div>
+                {/* Subtle border */}
+                <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10 group-hover:ring-cyan-400/30 transition-all duration-300" />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

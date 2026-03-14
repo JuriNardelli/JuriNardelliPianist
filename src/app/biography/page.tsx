@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/Navbar";
-import { SpaceshipBio } from "@/components/SpaceshipBio";
+import { BiographyFull } from "@/components/BiographyFull";
 import { SaturnGallery } from "@/components/SaturnGallery";
 import { Footer } from "@/components/Footer";
 import { BiographyCTA } from "@/components/BiographyCTA";
@@ -15,7 +15,7 @@ export default function BiographyPage() {
     <>
       <Navbar />
       <main className="bg-black">
-        <SpaceshipBio />
+        <BiographyFull />
         <SaturnGallery />
         <BiographyCTA />
       </main>
