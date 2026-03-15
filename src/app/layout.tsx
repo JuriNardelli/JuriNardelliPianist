@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { JsonLd, WEBSITE_JSONLD, PERSON_JSONLD } from "@/lib/structured-data";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -75,6 +76,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [
+              WEBSITE_JSONLD,
+              { "@context": "https://schema.org", ...PERSON_JSONLD },
+            ],
+          }}
+        />
       </body>
     </html>
   );
