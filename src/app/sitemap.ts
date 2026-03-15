@@ -3,6 +3,12 @@ import type { MetadataRoute } from "next";
 const blogSlugs = [
   "why-adults-make-better-piano-students",
   "online-piano-lessons-skeptic-convert",
+  "how-to-practice-piano-efficiently",
+  "what-to-look-for-in-a-piano-teacher",
+  "five-pieces-every-adult-beginner-should-learn",
+  "why-chopin-is-perfect-for-adult-learners",
+  "best-setup-for-online-piano-lessons",
+  "best-software-and-apps-for-piano-students",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

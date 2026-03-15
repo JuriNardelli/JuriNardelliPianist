@@ -8,6 +8,22 @@ import Link from "next/link";
 
 const articles = [
   {
+    slug: "five-pieces-every-adult-beginner-should-learn",
+    title: "5 Pieces Every Adult Beginner Should Learn First",
+    excerpt: "Repertoire choice matters more than you think. These five pieces will teach you technique, expression, and the joy of real music.",
+    date: "March 2026",
+    readTime: "9 min read",
+    category: "Repertoire",
+  },
+  {
+    slug: "how-to-practice-piano-efficiently",
+    title: "How to Practice Piano Efficiently (From a Teacher Who's Heard Every Excuse)",
+    excerpt: "You don't need two hours a day. You need twenty focused minutes. Here's exactly how to use them.",
+    date: "February 2026",
+    readTime: "7 min read",
+    category: "Practice",
+  },
+  {
     slug: "why-adults-make-better-piano-students",
     title: "Why Adults Make Better Piano Students Than They Think",
     excerpt: "The myth of the child prodigy has convinced millions of adults they've missed their window. Here's why that's nonsense.",
@@ -16,12 +32,44 @@ const articles = [
     category: "Learning",
   },
   {
+    slug: "best-setup-for-online-piano-lessons",
+    title: "The Best Setup for Online Piano Lessons",
+    excerpt: "Camera angles, microphones, lighting, and software settings. Everything you need for a great online lesson experience.",
+    date: "January 2026",
+    readTime: "10 min read",
+    category: "Technology",
+  },
+  {
     slug: "online-piano-lessons-skeptic-convert",
     title: "I Was Skeptical About Online Piano Lessons. Then I Tried Teaching Them.",
     excerpt: "After 4,000+ online lessons, I've learned that the camera doesn't lie - and that's actually a good thing.",
     date: "December 2025",
     readTime: "8 min read",
     category: "Teaching",
+  },
+  {
+    slug: "best-software-and-apps-for-piano-students",
+    title: "The Best Software and Apps for Piano Students",
+    excerpt: "The tools I actually recommend to my students — and the popular ones I tell them to avoid.",
+    date: "November 2025",
+    readTime: "8 min read",
+    category: "Technology",
+  },
+  {
+    slug: "what-to-look-for-in-a-piano-teacher",
+    title: "What to Look for in a Piano Teacher (And What to Run From)",
+    excerpt: "Not all teachers are created equal. Here's how to find one who will actually help you grow.",
+    date: "November 2025",
+    readTime: "7 min read",
+    category: "Learning",
+  },
+  {
+    slug: "why-chopin-is-perfect-for-adult-learners",
+    title: "Why Chopin Is the Perfect Composer for Adult Learners",
+    excerpt: "He wrote music that speaks directly to the heart. And he wrote it specifically for the piano. Here's why adults connect with Chopin like no other composer.",
+    date: "October 2025",
+    readTime: "8 min read",
+    category: "Repertoire",
   },
 ];
 
@@ -65,7 +113,7 @@ export function BlogContent() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
                 >
                   <Link href={`/blog/${article.slug}`} className="group block">
                     <div className="flex items-center gap-4 text-sm text-zinc-500 mb-3">
