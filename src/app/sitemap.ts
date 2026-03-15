@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 
-const blogSlugs = ["why-adults-make-better-piano-students"];
+const blogSlugs = [
+  "why-adults-make-better-piano-students",
+  "online-piano-lessons-skeptic-convert",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://jurinardelli.com";
