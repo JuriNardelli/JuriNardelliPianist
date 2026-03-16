@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Check,
@@ -9,13 +10,16 @@ import {
   Award,
   ArrowRight,
   ChevronDown,
-  Quote,
   Sparkles,
   Target,
+  FileText,
+  ArrowDown,
 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import Script from "next/script";
 import { ApplicationForm } from "./ApplicationForm";
+
+/* ─── ANIMATION VARIANTS ─── */
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -25,6 +29,15 @@ const fadeUp = {
     transition: { duration: 0.6, ease: "easeOut" as const },
   },
 };
+
+/* ─── DATA ─── */
+
+const guideTeasers = [
+  "Why finding the right intensity changes everything about your sound",
+  "The one thing most pianists overlook \u2014 and why it unlocks real progress",
+  "A counterintuitive practice drill that fixes your hardest passages",
+  "How slow practice really works (most students get this wrong)",
+];
 
 const features = [
   {
@@ -63,12 +76,12 @@ const faqs = [
     a: "This is exactly what I specialize in. Most plateaus come from technique issues or practice methods that were never corrected. I\u2019ll identify what\u2019s holding you back and give you concert-level guidance to break through.",
   },
   {
-    q: "How do online lessons work?",
-    a: "We meet weekly on Zoom for 60 minutes. You\u2019ll get a personalized practice plan after every session, plus you can send me recordings anytime for detailed video feedback between lessons.",
+    q: "What\u2019s in the free guide?",
+    a: "Four practice techniques I learned studying under a winner of the International Franz Liszt Piano Competition. They\u2019re the same methods I use with my private students \u2014 condensed into a short PDF you can apply in one afternoon.",
   },
   {
-    q: "What if I need to reschedule?",
-    a: "No problem \u2014 just let me know 24 hours in advance, and we\u2019ll find another time at no charge.",
+    q: "How do online lessons work?",
+    a: "We meet weekly on Zoom for 60 minutes. You\u2019ll get a personalized practice plan after every session, plus you can send me recordings anytime for detailed video feedback between lessons.",
   },
   {
     q: "How much does it cost?",
@@ -76,7 +89,212 @@ const faqs = [
   },
 ];
 
-export function AcademyFunnel() {
+/* ─── BREVO FORM (inlined for the guide) ─── */
+
+function BrevoGuideForm() {
+  useEffect(() => {
+    const w = window as unknown as Record<string, unknown>;
+    w.REQUIRED_CODE_ERROR_MESSAGE = "Please choose a country code";
+    w.LOCALE = "en";
+    w.EMAIL_INVALID_MESSAGE =
+      "The information provided is invalid. Please review the field format and try again.";
+    w.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank. ";
+    w.GENERIC_INVALID_MESSAGE =
+      "The information provided is invalid. Please review the field format and try again.";
+    w.translation = {
+      common: {
+        selectedList: "{quantity} list selected",
+        selectedLists: "{quantity} lists selected",
+        selectedOption: "{quantity} selected",
+        selectedOptions: "{quantity} selected",
+      },
+    };
+    w.AUTOHIDE = false;
+  }, []);
+
+  return (
+    <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            #sib-container-learn input:-ms-input-placeholder { text-align:left; font-family:Helvetica,sans-serif; color:#71717a; }
+            #sib-container-learn input::placeholder { text-align:left; font-family:Helvetica,sans-serif; color:#71717a; }
+            #sib-container-learn .input { background-color: rgba(39,39,42,0.5) !important; border-color: #3f3f46 !important; color: #fff !important; border-radius: 8px !important; padding: 14px 16px !important; font-size: 16px !important; }
+            #sib-container-learn .input:focus { border-color: rgba(245,158,11,0.5) !important; }
+            #sib-container-learn .sib-form-block__button { background-color: #f59e0b !important; color: #000 !important; border-radius: 8px !important; width: 100% !important; padding: 14px !important; font-size: 16px !important; }
+            #sib-container-learn .sib-form-block__button:hover { background-color: #fbbf24 !important; }
+            #sib-container-learn .entry__specification { color: #71717a !important; }
+          `,
+        }}
+      />
+      <link
+        rel="stylesheet"
+        href="https://sibforms.com/forms/end-form/build/sib-styles.css"
+      />
+
+      <div className="sib-form" style={{ textAlign: "center" }}>
+        <div id="sib-form-container" className="sib-form-container">
+          <div
+            id="error-message"
+            className="sib-form-message-panel"
+            style={{
+              fontSize: 14,
+              textAlign: "left",
+              fontFamily: "Helvetica, sans-serif",
+              color: "#661d1d",
+              backgroundColor: "#ffeded",
+              borderRadius: 8,
+              borderColor: "#ff4949",
+              maxWidth: "100%",
+            }}
+          >
+            <div className="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <svg
+                viewBox="0 0 512 512"
+                className="sib-icon sib-notification__icon"
+              >
+                <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
+              </svg>
+              <span className="sib-form-message-panel__inner-text">
+                Your subscription could not be saved. Please try again.
+              </span>
+            </div>
+          </div>
+
+          <div
+            id="success-message"
+            className="sib-form-message-panel"
+            style={{
+              fontSize: 14,
+              textAlign: "left",
+              fontFamily: "Helvetica, sans-serif",
+              color: "#085229",
+              backgroundColor: "#e7faf0",
+              borderRadius: 8,
+              borderColor: "#13ce66",
+              maxWidth: "100%",
+            }}
+          >
+            <div className="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <svg
+                viewBox="0 0 512 512"
+                className="sib-icon sib-notification__icon"
+              >
+                <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
+              </svg>
+              <span className="sib-form-message-panel__inner-text">
+                Check your inbox &mdash; your free guide is on its way!
+              </span>
+            </div>
+          </div>
+
+          <div
+            id="sib-container-learn"
+            className="sib-container--large sib-container--vertical"
+            style={{
+              textAlign: "center",
+              backgroundColor: "transparent",
+              maxWidth: "100%",
+              borderWidth: 0,
+              direction: "ltr",
+            }}
+          >
+            <form
+              id="sib-form"
+              method="POST"
+              action="https://60a76cb1.sibforms.com/serve/MUIFADAV1c6pt9Z65_slSqqThRF2nokozLqDan_dAAffCzQRx6Fv7sTfEBrPSiD2brY08u53SfSQ4iOdVmd3hhWjJ6aVpZdP2ZAive9v_snAOJxV-GXx_gR44L--EUr-s7LViQknM8xeiqjcTqhAgEqe9HnBHAKHhjUcqhKLOgAWU_agBa4VaE5PQD8-ppvUROUWaBzijjWIkExEfw=="
+              data-type="subscription"
+            >
+              <div style={{ padding: "6px 0" }}>
+                <div className="sib-input sib-form-block">
+                  <div className="form__entry entry_block">
+                    <div className="form__label-row">
+                      <div className="entry__field">
+                        <input
+                          className="input"
+                          type="text"
+                          id="EMAIL"
+                          name="EMAIL"
+                          autoComplete="off"
+                          placeholder="Your email address"
+                          data-required="true"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <label
+                      className="entry__error entry__error--primary"
+                      style={{
+                        fontSize: 14,
+                        textAlign: "left",
+                        fontFamily: "Helvetica, sans-serif",
+                        color: "#661d1d",
+                        backgroundColor: "#ffeded",
+                        borderRadius: 3,
+                        borderColor: "#ff4949",
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div style={{ padding: "6px 0" }}>
+                <div
+                  className="sib-form-block"
+                  style={{ textAlign: "center" }}
+                >
+                  <button
+                    className="sib-form-block__button sib-form-block__button-with-loader"
+                    style={{
+                      fontSize: 16,
+                      textAlign: "center",
+                      fontWeight: 700,
+                      fontFamily: "Helvetica, sans-serif",
+                      color: "#FFFFFF",
+                      backgroundColor: "#3E4857",
+                      borderRadius: 8,
+                      borderWidth: 0,
+                    }}
+                    form="sib-form"
+                    type="submit"
+                  >
+                    <svg
+                      className="icon clickable__icon progress-indicator__icon sib-hide-loader-icon"
+                      viewBox="0 0 512 512"
+                    >
+                      <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+                    </svg>
+                    Send Me the Free Guide
+                  </button>
+                </div>
+              </div>
+              <div style={{ padding: "4px 0" }}>
+                <div
+                  className="g-recaptcha-v3"
+                  data-sitekey="6LfYE4wsAAAAAF-3-E4szNHyVQCla37nFEvOb_Uj"
+                  style={{ display: "none" }}
+                />
+              </div>
+              <input
+                type="text"
+                name="email_address_check"
+                value=""
+                className="input--hidden"
+                readOnly
+              />
+              <input type="hidden" name="locale" value="en" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MAIN COMPONENT
+   ═══════════════════════════════════════════════════════════════ */
+
+export function LearnPage() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   return (
@@ -86,7 +304,7 @@ export function AcademyFunnel() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.04)_0%,transparent_50%)]" />
       </div>
 
-      {/* ─── HERO ─── */}
+      {/* ═══ 1. HERO ═══ */}
       <section className="relative z-10 flex min-h-[90vh] items-center justify-center px-6 pt-24 pb-16">
         <div className="mx-auto max-w-4xl text-center">
           <motion.p
@@ -107,7 +325,7 @@ export function AcademyFunnel() {
             <br />
             or finally ready to{" "}
             <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">
-              sound like the pianist
+              sound like the pianist{" "}
               <br className="hidden sm:block" />
               you know you can be
             </span>
@@ -131,23 +349,91 @@ export function AcademyFunnel() {
             className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
           >
             <a
-              href="#apply"
+              href="#free-guide"
               className="group relative inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-amber-500 to-amber-400 px-10 py-4 text-base font-bold text-black overflow-hidden shadow-[0_0_40px_rgba(251,191,36,0.25)] hover:shadow-[0_0_60px_rgba(251,191,36,0.4)] transition-shadow"
             >
-              Book a Free Discovery Call
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              Get the Free Practice Guide
+              <ArrowDown className="h-5 w-5 transition-transform group-hover:translate-y-1" />
             </a>
             <a
-              href="#how-it-works"
+              href="#apply"
               className="text-sm text-zinc-500 hover:text-amber-400 transition-colors"
             >
-              See how it works
+              or book a free discovery call
             </a>
           </motion.div>
         </div>
       </section>
 
-      {/* ─── DUAL AVATAR PAIN POINTS ─── */}
+      {/* ═══ 2. FREE GUIDE (lead magnet) ═══ */}
+      <section id="free-guide" className="relative z-10 py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative overflow-hidden rounded-2xl border border-amber-500/20 bg-gradient-to-br from-zinc-900/80 via-zinc-900/60 to-amber-950/20"
+          >
+            {/* Glow effects */}
+            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-amber-500/5 blur-3xl" />
+
+            <div className="relative grid gap-8 p-8 sm:p-12 lg:grid-cols-2 lg:gap-12">
+              {/* Left: Guide content */}
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-4 py-1.5 text-xs font-medium tracking-wide text-amber-400">
+                  <FileText className="h-3.5 w-3.5" />
+                  FREE PDF GUIDE
+                </div>
+
+                <h2 className="mt-5 text-2xl font-bold text-white sm:text-3xl leading-tight">
+                  Start Here: 4 Practice Secrets I Learned From One of the{" "}
+                  <span className="bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent">
+                    World&apos;s Greatest Concert Pianists
+                  </span>
+                </h2>
+
+                <p className="mt-4 text-zinc-400 text-sm leading-relaxed">
+                  The techniques I learned studying under a winner of the
+                  International Franz Liszt Piano Competition &mdash; now yours
+                  for free. Transform how you practice in one afternoon.
+                </p>
+
+                <ul className="mt-6 space-y-3">
+                  {guideTeasers.map((teaser, i) => (
+                    <motion.li
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex items-start gap-3 text-sm text-zinc-300"
+                    >
+                      <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-amber-500/20">
+                        <Check className="h-3 w-3 text-amber-400" />
+                      </div>
+                      {teaser}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right: Brevo form */}
+              <div className="flex items-center">
+                <div className="w-full">
+                  <BrevoGuideForm />
+                  <p className="text-center text-[11px] text-zinc-600 mt-3">
+                    No spam, ever. Unsubscribe anytime.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══ 3. PAIN POINTS — DUAL AVATAR ═══ */}
       <section className="relative z-10 py-24">
         <div className="mx-auto max-w-5xl px-6">
           <motion.div
@@ -187,7 +473,10 @@ export function AcademyFunnel() {
                   "\u201CI tried an app but it felt pointless.\u201D",
                   "\u201CI want someone to actually guide me, not just videos.\u201D",
                 ].map((quote, i) => (
-                  <p key={i} className="text-zinc-400 italic text-sm leading-relaxed">
+                  <p
+                    key={i}
+                    className="text-zinc-400 italic text-sm leading-relaxed"
+                  >
                     {quote}
                   </p>
                 ))}
@@ -222,7 +511,10 @@ export function AcademyFunnel() {
                   "\u201CI have bad habits I can\u2019t shake on my own.\u201D",
                   "\u201CI need someone at a real concert level, not just another teacher.\u201D",
                 ].map((quote, i) => (
-                  <p key={i} className="text-zinc-400 italic text-sm leading-relaxed">
+                  <p
+                    key={i}
+                    className="text-zinc-400 italic text-sm leading-relaxed"
+                  >
                     {quote}
                   </p>
                 ))}
@@ -250,7 +542,7 @@ export function AcademyFunnel() {
         </div>
       </section>
 
-      {/* ─── SOCIAL PROOF: LEON VIDEO ─── */}
+      {/* ═══ 4. SOCIAL PROOF: LEON VIDEO ═══ */}
       <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-4xl px-6">
           <motion.div
@@ -292,27 +584,26 @@ export function AcademyFunnel() {
             </p>
           </motion.div>
 
-          <motion.blockquote
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
             className="mt-10 mx-auto max-w-xl text-center"
           >
-            <Quote className="mx-auto h-8 w-8 text-amber-500/30" />
-            <p className="mt-4 text-lg italic text-zinc-300">
-              Pieces I thought were out of reach became achievable. Juri
-              doesn&apos;t just teach you the notes &mdash; he teaches you how
-              to think like a musician.
+            <p className="text-lg text-zinc-300 leading-relaxed">
+              Leon started as an amateur in 2023. With consistent mentorship,
+              he reached a{" "}
+              <span className="font-semibold text-white">
+                semi-professional level
+              </span>{" "}
+              &mdash; now performing pieces most adult learners only dream of.
             </p>
-            <p className="mt-3 font-medium text-white">
-              &mdash; Leon, adult student
-            </p>
-          </motion.blockquote>
+          </motion.div>
         </div>
       </section>
 
-      {/* ─── MEET YOUR MENTOR ─── */}
+      {/* ═══ 5. MEET YOUR MENTOR ═══ */}
       <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-5xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -371,7 +662,7 @@ export function AcademyFunnel() {
         </div>
       </section>
 
-      {/* ─── TRANSFORMATION / OUTCOMES ─── */}
+      {/* ═══ 6. TRANSFORMATION / OUTCOMES ═══ */}
       <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-5xl px-6">
           <motion.div
@@ -444,7 +735,7 @@ export function AcademyFunnel() {
         </div>
       </section>
 
-      {/* ─── WHAT YOU GET ─── */}
+      {/* ═══ 7. WHAT YOU GET (Academy features) ═══ */}
       <section
         id="how-it-works"
         className="relative z-10 border-t border-zinc-800/50 py-24"
@@ -458,12 +749,16 @@ export function AcademyFunnel() {
             className="text-center"
           >
             <p className="text-sm font-light tracking-[0.3em] uppercase text-amber-500/70">
-              The Experience
+              Ready for More?
             </p>
             <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
-              What You Get
+              What Private Mentorship Looks Like
             </h2>
             <div className="mx-auto mt-4 h-px w-16 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
+            <p className="mx-auto mt-6 max-w-2xl text-zinc-400">
+              The free guide is your first step. When you&apos;re ready for the
+              full experience, here&apos;s what working together looks like.
+            </p>
           </motion.div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
@@ -491,7 +786,7 @@ export function AcademyFunnel() {
         </div>
       </section>
 
-      {/* ─── FAQ ─── */}
+      {/* ═══ 8. FAQ ═══ */}
       <section className="relative z-10 border-t border-zinc-800/50 py-24">
         <div className="mx-auto max-w-2xl px-6">
           <motion.div
@@ -550,12 +845,12 @@ export function AcademyFunnel() {
         </div>
       </section>
 
-      {/* ─── CTA / APPLICATION ─── */}
+      {/* ═══ 9. DUAL CTA — Guide + Discovery Call ═══ */}
       <section
         id="apply"
         className="relative z-10 border-t border-zinc-800/50 py-24"
       >
-        <div className="mx-auto max-w-2xl px-6">
+        <div className="mx-auto max-w-4xl px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -563,25 +858,75 @@ export function AcademyFunnel() {
             variants={fadeUp}
             className="text-center"
           >
-            <p className="text-sm font-light tracking-[0.3em] uppercase text-amber-500/70">
-              Limited Spots Available
-            </p>
-            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
-              Start Your Journey
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              Your Next Step
             </h2>
             <div className="mx-auto mt-4 h-px w-16 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
-            <p className="mt-6 text-zinc-400 leading-relaxed">
-              Book a free 20-minute discovery call. No pressure &mdash; just a
-              conversation about where you are and where you want to go. If
-              we&apos;re a good fit, I&apos;ll recommend a plan.
-            </p>
           </motion.div>
 
-          <div className="mt-12">
-            <ApplicationForm />
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
+            {/* Option A: Free Guide */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-zinc-800/60 bg-zinc-900/40 p-8 text-center"
+            >
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/10">
+                <FileText className="h-6 w-6 text-amber-500" />
+              </div>
+              <h3 className="mt-4 text-xl font-bold text-white">
+                Start With the Free Guide
+              </h3>
+              <p className="mt-3 text-sm text-zinc-400">
+                Not ready for lessons yet? No problem. Download the practice
+                guide and start improving today.
+              </p>
+              <a
+                href="#free-guide"
+                className="mt-6 inline-flex items-center gap-2 rounded-full border border-amber-500/30 px-6 py-3 text-sm font-semibold text-amber-400 hover:bg-amber-500/10 transition-colors"
+              >
+                Get the Free Guide
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </motion.div>
+
+            {/* Option B: Discovery Call */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="rounded-2xl border border-amber-500/30 bg-gradient-to-br from-zinc-900/80 to-amber-950/20 p-8 text-center"
+            >
+              <p className="text-xs font-medium tracking-wide text-amber-500/70 uppercase">
+                Limited Spots
+              </p>
+              <h3 className="mt-3 text-xl font-bold text-white">
+                Book a Free Discovery Call
+              </h3>
+              <p className="mt-3 text-sm text-zinc-400">
+                Ready to start? Book a free 20-minute call. No pressure &mdash;
+                just a conversation about where you are and where you want to
+                go.
+              </p>
+              <div className="mt-6">
+                <ApplicationForm />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
+
+      {/* Brevo scripts */}
+      <Script
+        src="https://sibforms.com/forms/end-form/build/main.js"
+        strategy="lazyOnload"
+      />
+      <Script
+        src="https://www.google.com/recaptcha/api.js?render=6LfYE4wsAAAAAF-3-E4szNHyVQCla37nFEvOb_Uj&hl=en"
+        strategy="lazyOnload"
+      />
     </div>
   );
 }
