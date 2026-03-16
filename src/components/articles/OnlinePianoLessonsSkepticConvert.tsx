@@ -202,10 +202,10 @@ export default function OnlinePianoLessonsSkepticConvert() {
                     advanced players. Every lesson is tailored to you.
                   </p>
                   <Link
-                    href="/academy"
+                    href="/learn"
                     className="inline-block mt-4 text-sm text-zinc-400 hover:text-amber-300 transition-colors"
                   >
-                    See how the Academy works &rarr;
+                    See how it works &rarr;
                   </Link>
                 </div>
               </div>

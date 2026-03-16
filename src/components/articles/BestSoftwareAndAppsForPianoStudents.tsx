@@ -242,14 +242,14 @@ export default function BestSoftwareAndAppsForPianoStudents() {
                     Want personalized tool recommendations?
                   </p>
                   <p className="text-zinc-500 text-sm mt-2">
-                    In the Academy, I help each student build a practice toolkit
+                    I help each student build a practice toolkit
                     that fits their goals, level, and setup.
                   </p>
                   <Link
-                    href="/academy"
+                    href="/learn"
                     className="inline-block mt-4 text-sm text-zinc-400 hover:text-amber-300 transition-colors"
                   >
-                    Explore the Academy &rarr;
+                    Learn more &rarr;
                   </Link>
                 </div>
               </div>

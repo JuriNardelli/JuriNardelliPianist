@@ -351,11 +351,11 @@ export function Hero() {
               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
             </a>
             <a
-              href="/academy"
+              href="/learn"
               className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-medium text-black transition-all duration-300 hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Explore Academy
+                Start Learning
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
               <motion.div

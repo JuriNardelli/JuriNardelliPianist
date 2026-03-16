@@ -188,11 +188,11 @@ export default function FivePiecesEveryAdultBeginnerShouldLearn() {
                     Ready to start your first piece?
                   </p>
                   <p className="text-zinc-500 text-sm mt-2">
-                    In the Academy, I guide you through repertoire selection and
+                    I guide you through repertoire selection and
                     help you build a learning path that keeps you motivated.
                   </p>
                   <Link
-                    href="/academy"
+                    href="/learn"
                     className="inline-block mt-4 text-sm text-zinc-400 hover:text-amber-300 transition-colors"
                   >
                     Start your journey &rarr;

@@ -14,14 +14,19 @@ export function Footer() {
 
           {/* Navigation */}
           <nav className="flex flex-wrap justify-center gap-10">
-            {["Home", "Biography", "Academy", "Contact"].map((item) => (
+            {[
+              { label: "Home", href: "/" },
+              { label: "Biography", href: "/biography" },
+              { label: "Learn", href: "/learn" },
+              { label: "Contact", href: "/contact" },
+            ].map((item) => (
               <motion.a
-                key={item}
-                href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                key={item.label}
+                href={item.href}
                 className="relative text-sm tracking-wide text-zinc-500 transition-all duration-300 hover:text-white"
                 whileHover={{ y: -1 }}
               >
-                {item}
+                {item.label}
               </motion.a>
             ))}
           </nav>

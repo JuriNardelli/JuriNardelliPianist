@@ -389,7 +389,7 @@ export function FreeGuidePage() {
                 winner of the International Franz Liszt Piano Competition.
               </p>
               <a
-                href="/academy"
+                href="/learn"
                 className="mt-2 inline-block text-sm text-amber-500 hover:text-amber-400 transition-colors"
               >
                 Learn more about private lessons &rarr;

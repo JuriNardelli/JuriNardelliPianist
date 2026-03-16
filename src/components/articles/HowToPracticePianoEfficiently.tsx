@@ -205,14 +205,14 @@ export default function HowToPracticePianoEfficiently() {
                     Want structured practice guidance?
                   </p>
                   <p className="text-zinc-500 text-sm mt-2">
-                    In the Academy, every lesson comes with specific practice
+                    Every lesson comes with specific practice
                     instructions tailored to your level and goals.
                   </p>
                   <Link
-                    href="/academy"
+                    href="/learn"
                     className="inline-block mt-4 text-sm text-zinc-400 hover:text-amber-300 transition-colors"
                   >
-                    Join the Academy &rarr;
+                    Start learning &rarr;
                   </Link>
                 </div>
               </div>

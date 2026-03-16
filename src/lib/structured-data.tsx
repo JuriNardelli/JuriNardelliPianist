@@ -64,14 +64,14 @@ export const COURSE_JSONLD = {
     name: "Juri Nardelli",
     url: "https://jurinardelli.com",
   },
-  url: "https://jurinardelli.com/academy",
+  url: "https://jurinardelli.com/learn",
   courseMode: "Online",
   offers: {
     "@type": "Offer",
     price: "499",
     priceCurrency: "USD",
     availability: "https://schema.org/InStock",
-    url: "https://jurinardelli.com/academy",
+    url: "https://jurinardelli.com/learn",
     description: "Monthly subscription. Cancel anytime.",
   },
   hasCourseInstance: {
