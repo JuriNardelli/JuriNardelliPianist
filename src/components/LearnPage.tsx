@@ -6,14 +6,16 @@ import {
   Check,
   Music,
   Users,
-  MessageCircle,
-  Award,
   ArrowRight,
   ChevronDown,
   Sparkles,
   Target,
   FileText,
   ArrowDown,
+  Mic2,
+  Disc3,
+  BookOpen,
+  Heart,
 } from "lucide-react";
 import Image from "next/image";
 import Script from "next/script";
@@ -39,30 +41,42 @@ const guideTeasers = [
   "How slow practice really works (most students get this wrong)",
 ];
 
-const features = [
+const pillars = [
   {
     icon: Music,
-    title: "Weekly 1-on-1 Lessons",
+    title: "1-on-1 Private Lessons",
     description:
-      "60-minute private sessions on Zoom, fully tailored to your level, goals, and repertoire.",
-  },
-  {
-    icon: MessageCircle,
-    title: "Unlimited Feedback",
-    description:
-      "Send practice recordings anytime. Get detailed video feedback within 48 hours.",
+      "Personalized sessions built entirely around your repertoire, technique, and musical goals. No generic curriculum \u2014 every minute is about you.",
   },
   {
     icon: Users,
-    title: "Workshops & Masterclasses",
+    title: "Collective Sessions",
     description:
-      "Monthly group sessions on interpretation, technique, and performance psychology.",
+      "Monthly community workshops on interpretation, performance psychology, and music theory. Learn alongside other dedicated adult pianists.",
   },
   {
-    icon: Award,
-    title: "Private Community",
+    icon: Mic2,
+    title: "Live Recitals",
     description:
-      "Connect with a small circle of serious, like-minded adult pianists.",
+      "Perform in several live recitals throughout the year in a real concert setting. Because music was made to be shared.",
+  },
+  {
+    icon: Disc3,
+    title: "Recording Workshops",
+    description:
+      "Learn to record, analyse, and use recordings as a powerful practice tool. Keep memories of your playing forever \u2014 and produce your own music.",
+  },
+  {
+    icon: BookOpen,
+    title: "Music Theory & Appreciation",
+    description:
+      "Deepen your understanding of the music you play \u2014 history, harmony, and the art of listening. Know the why behind every note.",
+  },
+  {
+    icon: Heart,
+    title: "Community",
+    description:
+      "Join a private circle of serious adult pianists who share your dedication. Support, inspiration, and friendships that go beyond the keyboard.",
   },
 ];
 
@@ -82,10 +96,6 @@ const faqs = [
   {
     q: "How do online lessons work?",
     a: "We meet weekly on Zoom for 60 minutes. You\u2019ll get a personalized practice plan after every session, plus you can send me recordings anytime for detailed video feedback between lessons.",
-  },
-  {
-    q: "How much does it cost?",
-    a: "Pricing depends on the package. Book a free discovery call and I\u2019ll recommend the right plan for your goals and schedule.",
   },
 ];
 
@@ -263,7 +273,7 @@ function BrevoGuideForm() {
                     >
                       <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
                     </svg>
-                    Send Me the Free Guide
+                    Download the Free Guide
                   </button>
                 </div>
               </div>
@@ -395,9 +405,10 @@ export function LearnPage() {
                 </h2>
 
                 <p className="mt-4 text-zinc-400 text-sm leading-relaxed">
-                  The techniques I learned studying under a winner of the
-                  International Franz Liszt Piano Competition &mdash; now yours
-                  for free. Transform how you practice in one afternoon.
+                  I studied with one of the greatest concert pianists in the
+                  world. These are the 4 practice secrets he passed on to me
+                  &mdash; things no regular piano teacher will ever show you.
+                  Free, yours instantly.
                 </p>
 
                 <ul className="mt-6 space-y-3">
@@ -735,12 +746,15 @@ export function LearnPage() {
         </div>
       </section>
 
-      {/* ═══ 7. WHAT YOU GET (Academy features) ═══ */}
+      {/* ═══ 7. WHAT'S INCLUDED — 6 PILLARS ═══ */}
       <section
         id="how-it-works"
-        className="relative z-10 border-t border-zinc-800/50 py-24"
+        className="relative z-10 border-t border-zinc-800/50 py-28"
       >
-        <div className="mx-auto max-w-5xl px-6">
+        {/* Section background accent */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.03)_0%,transparent_60%)]" />
+
+        <div className="relative mx-auto max-w-6xl px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -749,37 +763,41 @@ export function LearnPage() {
             className="text-center"
           >
             <p className="text-sm font-light tracking-[0.3em] uppercase text-amber-500/70">
-              Ready for More?
+              The Full Experience
             </p>
-            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
-              What Private Mentorship Looks Like
+            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+              Everything You Need.{" "}
+              <span className="bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent">
+                Nothing You Don&apos;t.
+              </span>
             </h2>
-            <div className="mx-auto mt-4 h-px w-16 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
-            <p className="mx-auto mt-6 max-w-2xl text-zinc-400">
-              The free guide is your first step. When you&apos;re ready for the
-              full experience, here&apos;s what working together looks like.
-            </p>
+            <div className="mx-auto mt-6 h-px w-20 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
           </motion.div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {features.map((feature, i) => (
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {pillars.map((pillar, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group rounded-2xl border border-zinc-800/50 bg-zinc-900/30 p-6"
+                transition={{ delay: i * 0.08 }}
+                className="group relative overflow-hidden rounded-2xl border border-zinc-800/60 bg-zinc-900/40 p-8 hover:border-amber-500/30 transition-colors"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500 group-hover:bg-amber-500/20 transition-colors">
-                  <feature.icon className="h-5 w-5" />
+                {/* Subtle hover glow */}
+                <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-amber-500/0 blur-2xl group-hover:bg-amber-500/5 transition-colors" />
+
+                <div className="relative">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-500/5 text-amber-500 ring-1 ring-amber-500/20">
+                    <pillar.icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="mt-6 text-xl font-bold text-white">
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-3 text-sm text-zinc-400 leading-relaxed">
+                    {pillar.description}
+                  </p>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-white">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
-                  {feature.description}
-                </p>
               </motion.div>
             ))}
           </div>
