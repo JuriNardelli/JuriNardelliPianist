@@ -5,6 +5,7 @@ import { Check, Music, Users, MessageCircle, Award, ArrowRight, ChevronDown, Pla
 import Image from "next/image";
 import { useState } from "react";
 import { ApplicationForm } from "./ApplicationForm";
+import { LeadMagnet } from "./LeadMagnet";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
@@ -157,6 +158,9 @@ export function AcademyFunnel() {
           </motion.button>
         </div>
       </section>
+
+      {/* Lead Magnet — always visible */}
+      <LeadMagnet />
 
       {/* Step 1: Pain Points */}
       <AnimatePresence>
