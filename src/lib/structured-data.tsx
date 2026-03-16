@@ -19,6 +19,7 @@ export const PERSON_JSONLD = {
     "https://www.instagram.com/jnpianist/",
     "https://www.youtube.com/channel/UCW__wlOO7iwwM2lGz8J8ywQ",
     "https://www.tiktok.com/@jnpianist",
+    "https://www.facebook.com/jnpianist/",
   ],
   knowsAbout: [
     "Classical Piano",
