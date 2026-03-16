@@ -54,45 +54,28 @@ const chapters = [
   },
 ];
 
-const accentColors = [
-  "from-cyan-400/20 via-blue-500/10",
-  "from-amber-400/20 via-orange-500/10",
-  "from-emerald-400/20 via-teal-500/10",
-  "from-violet-400/20 via-purple-500/10",
-  "from-rose-400/20 via-pink-500/10",
-  "from-fuchsia-400/20 via-pink-500/10",
-];
-
-const borderColors = [
-  "border-cyan-400/30",
-  "border-amber-400/30",
-  "border-emerald-400/30",
-  "border-violet-400/30",
-  "border-rose-400/30",
-  "border-fuchsia-400/30",
-];
-
-const yearColors = [
-  { text: "text-cyan-400", bg: "bg-cyan-400/10", border: "border-cyan-400/30" },
-  { text: "text-amber-400", bg: "bg-amber-400/10", border: "border-amber-400/30" },
-  { text: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-400/30" },
-  { text: "text-violet-400", bg: "bg-violet-400/10", border: "border-violet-400/30" },
-  { text: "text-rose-400", bg: "bg-rose-400/10", border: "border-rose-400/30" },
-  { text: "text-fuchsia-400", bg: "bg-fuchsia-400/10", border: "border-fuchsia-400/30" },
-];
-
 export function BiographyFull() {
   return (
     <section className="relative bg-black overflow-hidden">
-      {/* Space background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050510] via-[#0a0a1a] to-black" />
+      {/* Subtle gradient background — matching site style */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 via-black to-black" />
 
-      {/* Nebula accents */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[10%] -left-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-r from-purple-900/15 via-transparent to-transparent blur-3xl" />
-        <div className="absolute top-[40%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-l from-cyan-900/10 via-transparent to-transparent blur-3xl" />
-        <div className="absolute top-[70%] -left-[5%] w-[400px] h-[400px] rounded-full bg-gradient-to-r from-violet-900/10 via-transparent to-transparent blur-3xl" />
-      </div>
+      {/* Subtle floating orbs */}
+      <motion.div
+        className="absolute top-[15%] left-[10%] w-80 h-80 rounded-full bg-white/[0.02] blur-3xl"
+        animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute top-[50%] right-[5%] w-64 h-64 rounded-full bg-zinc-500/[0.02] blur-3xl"
+        animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute top-[80%] left-[20%] w-72 h-72 rounded-full bg-white/[0.015] blur-3xl"
+        animate={{ x: [0, 25, 0], y: [0, -20, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="relative z-10">
         {/* Header */}
@@ -103,13 +86,13 @@ export function BiographyFull() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <p className="text-sm font-light tracking-[0.3em] uppercase text-zinc-400">
-              Journey Through Time
+            <p className="text-sm font-light tracking-[0.3em] uppercase text-zinc-500">
+              The Story
             </p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              The Story
+              Biography
             </h1>
-            <div className="mx-auto mt-6 h-px w-24 bg-gradient-to-r from-rose-500 via-cyan-500 to-fuchsia-500" />
+            <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-zinc-600 to-transparent" />
           </motion.div>
         </div>
 
@@ -134,13 +117,9 @@ export function BiographyFull() {
               >
                 {/* Image */}
                 <div className="relative flex-shrink-0 group">
-                  {/* Glow behind image */}
-                  <div
-                    className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${accentColors[index]} to-transparent blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700`}
-                  />
-                  <div
-                    className={`relative h-64 w-64 sm:h-72 sm:w-72 lg:h-80 lg:w-80 overflow-hidden rounded-2xl border ${borderColors[index]} shadow-lg`}
-                  >
+                  {/* Subtle glow behind image */}
+                  <div className="absolute -inset-3 rounded-2xl bg-white/[0.03] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="relative h-64 w-64 sm:h-72 sm:w-72 lg:h-80 lg:w-80 overflow-hidden rounded-2xl border border-white/10 shadow-lg">
                     <Image
                       src={chapter.image}
                       alt={chapter.title}
@@ -157,9 +136,7 @@ export function BiographyFull() {
                     isEven ? "md:text-left" : "md:text-right"
                   }`}
                 >
-                  <span
-                    className={`inline-block px-3 py-1 text-xs font-light tracking-widest uppercase rounded-full border ${yearColors[index].text} ${yearColors[index].bg} ${yearColors[index].border}`}
-                  >
+                  <span className="inline-block px-3 py-1 text-xs font-light tracking-widest uppercase rounded-full border border-white/10 bg-white/5 text-zinc-400">
                     {chapter.year}
                   </span>
                   <h2 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">
@@ -182,7 +159,7 @@ export function BiographyFull() {
           transition={{ duration: 0.6 }}
           className="pb-24 text-center max-w-2xl mx-auto px-6"
         >
-          <div className="h-px w-24 mx-auto bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent mb-8" />
+          <div className="h-px w-16 mx-auto bg-gradient-to-r from-transparent via-zinc-600 to-transparent mb-8" />
           <p className="text-lg font-light italic text-zinc-500">
             "Music is the universal language that speaks directly to the soul."
           </p>
