@@ -1,49 +1,30 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { FileText, Download, Check, Loader2 } from "lucide-react";
-import { useState, FormEvent } from "react";
-
-const secrets = [
-  "The 20-minute rule that beats 2 hours of unfocused practice",
-  "A 3-pass method used by conservatory students worldwide",
-  "The mental practice technique that accelerates memorization",
-  "How to know when a piece is truly ready to perform",
-];
+import { useEffect } from "react";
+import Script from "next/script";
+import { motion } from "framer-motion";
 
 export function LeadMagnet() {
-  const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [downloadUrl, setDownloadUrl] = useState("");
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!firstName.trim() || !email.trim()) return;
-
-    setStatus("loading");
-
-    try {
-      const res = await fetch("/api/lead-magnet", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName: firstName.trim(), email: email.trim() }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        setStatus("success");
-        setDownloadUrl(data.downloadUrl || "/downloads/4-practice-secrets.pdf");
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
+  useEffect(() => {
+    // Brevo form global config
+    const w = window as unknown as Record<string, unknown>;
+    w.REQUIRED_CODE_ERROR_MESSAGE = "Please choose a country code";
+    w.LOCALE = "en";
+    w.EMAIL_INVALID_MESSAGE =
+      "The information provided is invalid. Please review the field format and try again.";
+    w.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank. ";
+    w.GENERIC_INVALID_MESSAGE =
+      "The information provided is invalid. Please review the field format and try again.";
+    w.translation = {
+      common: {
+        selectedList: "{quantity} list selected",
+        selectedLists: "{quantity} lists selected",
+        selectedOption: "{quantity} selected",
+        selectedOptions: "{quantity} selected",
+      },
+    };
+    w.AUTOHIDE = false;
+  }, []);
 
   return (
     <section className="relative z-10 py-20">
@@ -53,177 +34,219 @@ export function LeadMagnet() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-2xl border border-amber-500/20 bg-gradient-to-br from-zinc-900/80 via-zinc-900/60 to-amber-950/20"
+          className="relative overflow-hidden rounded-2xl border border-amber-500/20 bg-gradient-to-br from-zinc-900/80 via-zinc-900/60 to-amber-950/20 p-8 sm:p-12"
         >
           {/* Background glow */}
           <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl" />
           <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-amber-500/5 blur-3xl" />
 
-          <div className="relative grid gap-8 p-8 sm:p-12 lg:grid-cols-2 lg:gap-12">
-            {/* Left: Content */}
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-4 py-1.5 text-xs font-medium tracking-wide text-amber-400">
-                <FileText className="h-3.5 w-3.5" />
-                FREE PDF GUIDE
-              </div>
+          <div className="relative text-center">
+            <h2 className="text-2xl font-bold text-white sm:text-3xl leading-tight">
+              Get the Free Guide: 4 Practice Secrets I Learned From One of the{" "}
+              <span className="bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent">
+                World&apos;s Greatest Concert Pianists
+              </span>
+            </h2>
 
-              <h2 className="mt-5 text-2xl font-bold text-white sm:text-3xl leading-tight">
-                4 Practice Secrets
-                <br />
-                <span className="bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent">
-                  From a Concert Pianist
-                </span>
-              </h2>
+            <p className="mx-auto mt-4 max-w-lg text-zinc-400 text-sm leading-relaxed">
+              I studied with one of the greatest concert pianists in the world. These are
+              the 4 practice secrets he passed on to me — things no regular piano teacher
+              will ever show you. Free, yours instantly.
+            </p>
 
-              <p className="mt-4 text-zinc-400 text-sm leading-relaxed">
-                The techniques I teach my private students — now yours for free.
-                Transform how you practice in one afternoon.
-              </p>
+            {/* Brevo Embed Form */}
+            <div className="mx-auto mt-8 max-w-[540px]">
+              <style
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    #sib-container input:-ms-input-placeholder { text-align:left; font-family:Helvetica,sans-serif; color:#71717a; }
+                    #sib-container input::placeholder { text-align:left; font-family:Helvetica,sans-serif; color:#71717a; }
+                    #sib-container textarea::placeholder { text-align:left; font-family:Helvetica,sans-serif; color:#71717a; }
+                    #sib-container a { text-decoration:underline; color:#fbbf24; }
+                    #sib-container .input { background-color: rgba(39,39,42,0.5) !important; border-color: #3f3f46 !important; color: #fff !important; }
+                    #sib-container .input:focus { border-color: rgba(245,158,11,0.5) !important; }
+                    #sib-container .sib-form-block__button { background-color: #f59e0b !important; color: #000 !important; border-radius: 8px !important; }
+                    #sib-container .sib-form-block__button:hover { background-color: #fbbf24 !important; }
+                    #sib-container .entry__specification { color: #71717a !important; }
+                  `,
+                }}
+              />
+              <link
+                rel="stylesheet"
+                href="https://sibforms.com/forms/end-form/build/sib-styles.css"
+              />
 
-              <ul className="mt-6 space-y-3">
-                {secrets.map((secret, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-start gap-3 text-sm text-zinc-300"
+              <div className="sib-form" style={{ textAlign: "center" }}>
+                <div id="sib-form-container" className="sib-form-container">
+                  <div
+                    id="error-message"
+                    className="sib-form-message-panel"
+                    style={{
+                      fontSize: 16,
+                      textAlign: "left",
+                      fontFamily: "Helvetica, sans-serif",
+                      color: "#661d1d",
+                      backgroundColor: "#ffeded",
+                      borderRadius: 3,
+                      borderColor: "#ff4949",
+                      maxWidth: 540,
+                    }}
                   >
-                    <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-amber-500/20">
-                      <Check className="h-3 w-3 text-amber-400" />
-                    </div>
-                    {secret}
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Right: Form */}
-            <div className="flex items-center">
-              <AnimatePresence mode="wait">
-                {status === "success" ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="w-full text-center"
-                  >
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20">
-                      <Check className="h-8 w-8 text-green-400" />
-                    </div>
-                    <h3 className="mt-4 text-xl font-semibold text-white">
-                      Check your inbox!
-                    </h3>
-                    <p className="mt-2 text-sm text-zinc-400">
-                      The guide is on its way. You can also download it
-                      directly:
-                    </p>
-                    <a
-                      href={downloadUrl}
-                      download
-                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-400 px-8 py-3 text-sm font-bold text-black hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] transition-shadow"
-                    >
-                      <Download className="h-4 w-4" />
-                      Download PDF Now
-                    </a>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    key="form"
-                    onSubmit={handleSubmit}
-                    className="w-full space-y-4"
-                  >
-                    <div>
-                      <label
-                        htmlFor="lead-first-name"
-                        className="block text-xs font-medium text-zinc-400 mb-1.5"
-                      >
-                        First name
-                      </label>
-                      <input
-                        id="lead-first-name"
-                        type="text"
-                        required
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="Your first name"
-                        className="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none transition-colors focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20"
-                      />
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="lead-email"
-                        className="block text-xs font-medium text-zinc-400 mb-1.5"
-                      >
-                        Email
-                      </label>
-                      <input
-                        id="lead-email"
-                        type="email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="your@email.com"
-                        className="w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none transition-colors focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20"
-                      />
-                    </div>
-
-                    <motion.button
-                      type="submit"
-                      disabled={status === "loading"}
-                      className="w-full group relative overflow-hidden rounded-lg bg-gradient-to-r from-amber-500 to-amber-400 px-6 py-3.5 text-sm font-bold text-black shadow-[0_0_30px_rgba(251,191,36,0.3)] disabled:opacity-70"
-                      whileHover={{
-                        scale: 1.02,
-                        boxShadow: "0 0 40px rgba(251,191,36,0.5)",
-                      }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12"
-                        animate={{ x: ["-200%", "200%"] }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          repeatDelay: 3,
-                        }}
-                      />
-                      <span className="relative z-10 flex items-center justify-center gap-2">
-                        {status === "loading" ? (
-                          <>
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            <Download className="h-4 w-4" />
-                            Send Me the Free Guide
-                          </>
-                        )}
+                    <div className="sib-form-message-panel__text sib-form-message-panel__text--center">
+                      <svg viewBox="0 0 512 512" className="sib-icon sib-notification__icon">
+                        <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
+                      </svg>
+                      <span className="sib-form-message-panel__inner-text">
+                        Your subscription could not be saved. Please try again.
                       </span>
-                    </motion.button>
+                    </div>
+                  </div>
 
-                    {status === "error" && (
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-center text-xs text-red-400"
-                      >
-                        Something went wrong. Please try again.
-                      </motion.p>
-                    )}
+                  <div
+                    id="success-message"
+                    className="sib-form-message-panel"
+                    style={{
+                      fontSize: 16,
+                      textAlign: "left",
+                      fontFamily: "Helvetica, sans-serif",
+                      color: "#085229",
+                      backgroundColor: "#e7faf0",
+                      borderRadius: 3,
+                      borderColor: "#13ce66",
+                      maxWidth: 540,
+                    }}
+                  >
+                    <div className="sib-form-message-panel__text sib-form-message-panel__text--center">
+                      <svg viewBox="0 0 512 512" className="sib-icon sib-notification__icon">
+                        <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
+                      </svg>
+                      <span className="sib-form-message-panel__inner-text">
+                        Check your inbox — your free guide is on its way!
+                      </span>
+                    </div>
+                  </div>
 
-                    <p className="text-center text-[11px] text-zinc-600">
-                      No spam, ever. Unsubscribe anytime.
-                    </p>
-                  </motion.form>
-                )}
-              </AnimatePresence>
+                  <div
+                    id="sib-container"
+                    className="sib-container--large sib-container--vertical"
+                    style={{
+                      textAlign: "center",
+                      backgroundColor: "transparent",
+                      maxWidth: 540,
+                      borderRadius: 3,
+                      borderWidth: 0,
+                      direction: "ltr",
+                    }}
+                  >
+                    <form
+                      id="sib-form"
+                      method="POST"
+                      action="https://60a76cb1.sibforms.com/serve/MUIFADAV1c6pt9Z65_slSqqThRF2nokozLqDan_dAAffCzQRx6Fv7sTfEBrPSiD2brY08u53SfSQ4iOdVmd3hhWjJ6aVpZdP2ZAive9v_snAOJxV-GXx_gR44L--EUr-s7LViQknM8xeiqjcTqhAgEqe9HnBHAKHhjUcqhKLOgAWU_agBa4VaE5PQD8-ppvUROUWaBzijjWIkExEfw=="
+                      data-type="subscription"
+                    >
+                      <div style={{ padding: "8px 0" }}>
+                        <div className="sib-input sib-form-block">
+                          <div className="form__entry entry_block">
+                            <div className="form__label-row">
+                              <div className="entry__field">
+                                <input
+                                  className="input"
+                                  type="text"
+                                  id="EMAIL"
+                                  name="EMAIL"
+                                  autoComplete="off"
+                                  placeholder="EMAIL"
+                                  data-required="true"
+                                  required
+                                />
+                              </div>
+                            </div>
+                            <label
+                              className="entry__error entry__error--primary"
+                              style={{
+                                fontSize: 16,
+                                textAlign: "left",
+                                fontFamily: "Helvetica, sans-serif",
+                                color: "#661d1d",
+                                backgroundColor: "#ffeded",
+                                borderRadius: 3,
+                                borderColor: "#ff4949",
+                              }}
+                            />
+                            <label
+                              className="entry__specification"
+                              style={{
+                                fontSize: 12,
+                                textAlign: "left",
+                                fontFamily: "Helvetica, sans-serif",
+                                color: "#8390A4",
+                              }}
+                            >
+                              Your email address
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div style={{ padding: "8px 0" }}>
+                        <div className="sib-form-block" style={{ textAlign: "left" }}>
+                          <button
+                            className="sib-form-block__button sib-form-block__button-with-loader"
+                            style={{
+                              fontSize: 16,
+                              textAlign: "left",
+                              fontWeight: 700,
+                              fontFamily: "Helvetica, sans-serif",
+                              color: "#FFFFFF",
+                              backgroundColor: "#3E4857",
+                              borderRadius: 3,
+                              borderWidth: 0,
+                            }}
+                            form="sib-form"
+                            type="submit"
+                          >
+                            <svg
+                              className="icon clickable__icon progress-indicator__icon sib-hide-loader-icon"
+                              viewBox="0 0 512 512"
+                            >
+                              <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+                            </svg>
+                            Download the Free Guide
+                          </button>
+                        </div>
+                      </div>
+                      <div style={{ padding: "8px 0" }}>
+                        <div
+                          className="g-recaptcha-v3"
+                          data-sitekey="6LfYE4wsAAAAAF-3-E4szNHyVQCla37nFEvOb_Uj"
+                          style={{ display: "none" }}
+                        />
+                      </div>
+
+                      <input
+                        type="text"
+                        name="email_address_check"
+                        value=""
+                        className="input--hidden"
+                        readOnly
+                      />
+                      <input type="hidden" name="locale" value="en" />
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
       </div>
+
+      <Script
+        src="https://sibforms.com/forms/end-form/build/main.js"
+        strategy="lazyOnload"
+      />
+      <Script
+        src="https://www.google.com/recaptcha/api.js?render=6LfYE4wsAAAAAF-3-E4szNHyVQCla37nFEvOb_Uj&hl=en"
+        strategy="lazyOnload"
+      />
     </section>
   );
 }
